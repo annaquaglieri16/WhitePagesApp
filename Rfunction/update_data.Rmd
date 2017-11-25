@@ -1,0 +1,185 @@
+---
+title: "Download and backup data"
+author: "Anna Quaglieri"
+output:
+  html_notebook:
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+    fig_caption: yes
+---
+
+`r Sys.Date()`.
+
+```{r include=FALSE,message=FALSE,echo=TRUE}
+knitr::opts_chunk$set(echo = TRUE,tidy = TRUE)
+
+library(DT)
+library(tidyverse)
+library(redcapAPI)
+library(reshape2)
+library(knitr)
+library(chron)
+
+# Directories
+# create backup folder with a specific date
+date <- Sys.Date()
+dirAppBackup <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files"
+dirAppBackupDate <- file.path(dirApp,"backedup_files",date)
+dir.create(dirAppBackupDate,showWarnings = FALSE,recursive = TRUE)
+
+# Students' photos directory
+dirAppBackupImages <- file.path(dirAppBackupDate,"images")
+dir.create(dirAppBackupImages,showWarnings = FALSE,recursive = TRUE)
+
+# Dir of the App
+dirApp <- "/Users/quaglieri.a/WhitePages/WhitePagesApp"
+```
+
+# Dowload from API
+
+```{r download_data}
+api_token <- '9938D7E7B9B2D861EE7E1F4FFB64637A'
+rcon <- redcapConnection(url="https://redcap.wehi.edu.au/api/", token=api_token)
+white_pages <- exportRecords(rcon)
+white_pages$PhotoName <- NA
+```
+
+# Clean text data
+
+Try to mkae every text column as a list of item separated by a comma.
+
+```{r clean_data}
+# areas_of_interest_or_exper
+white_pages$areas_of_interest_or_exper <- gsub("\n",",",white_pages$areas_of_interest_or_exper)
+white_pages$areas_of_interest_or_exper <- gsub(" ,",",",white_pages$areas_of_interest_or_exper)
+white_pages$areas_of_interest_or_exper <- gsub(",",", ",white_pages$areas_of_interest_or_exper)
+white_pages$areas_of_interest_or_exper <- gsub("  "," ",white_pages$areas_of_interest_or_exper)
+white_pages$areas_of_interest_or_exper <- gsub(", ,",",",white_pages$areas_of_interest_or_exper)
+
+# equipment_experience
+white_pages$equipment_experience <- gsub("\n",",",white_pages$equipment_experience)
+white_pages$equipment_experience <- gsub(" ,",",",white_pages$equipment_experience)
+white_pages$equipment_experience <- gsub(",",", ",white_pages$equipment_experience)
+white_pages$equipment_experience <- gsub("  "," ",white_pages$equipment_experience)
+white_pages$equipment_experience <- gsub(", ,",",",white_pages$equipment_experience)
+
+# lab skills
+white_pages$lab_skills <- gsub("\n",",",white_pages$lab_skills)
+white_pages$lab_skills <- gsub(" ,",",",white_pages$lab_skills)
+white_pages$lab_skills <- gsub(",",", ",white_pages$lab_skills)
+white_pages$lab_skills <- gsub("  "," ",white_pages$lab_skills)
+white_pages$lab_skills <- gsub(", ,",",",white_pages$lab_skills)
+
+# Hobby interest
+white_pages$hobbies_interests <- gsub("\n",",",white_pages$hobbies_interests)
+white_pages$hobbies_interests <- gsub(" ,",",",white_pages$hobbies_interests)
+white_pages$hobbies_interests <- gsub(",",", ",white_pages$hobbies_interests)
+white_pages$hobbies_interests <- gsub("  "," ",white_pages$hobbies_interests)
+white_pages$hobbies_interests <- gsub(", ,",",",white_pages$hobbies_interests)
+
+# software_experience
+white_pages$software_experience <- gsub("\n",",",white_pages$software_experience)
+white_pages$software_experience <- gsub(" ,",",",white_pages$software_experience)
+white_pages$software_experience <- gsub(",",", ",white_pages$software_experience)
+white_pages$software_experience <- gsub("  "," ",white_pages$software_experience)
+white_pages$software_experience <- gsub(", ,",",",white_pages$software_experience)
+```
+
+# Remove duplicated entries for students
+
+```{r}
+# Name for folder with _ between Name and Surname
+# Name for display
+white_pages$NameFolder <- paste(white_pages$first_name,white_pages$last_name,sep="_")
+white_pages$NameDisplay <- paste(white_pages$first_name,white_pages$last_name)
+
+# Convert wehi_white_pages_timestamp into date and time
+white_pages$dtimes <- white_pages$wehi_white_pages_timestamp
+dtparts = t(as.data.frame(strsplit(as.character(white_pages$dtimes),' ')))
+row.names(dtparts) = NULL
+thetimes = chron(dates=dtparts[,1],times=dtparts[,2],
+                  format=c('y-m-d','h:m:s'))
+white_pages$thetimes <- thetimes
+```
+
+## Entried with timestamp NA are removed
+
+```{r}
+white_pages[is.na(white_pages$wehi_white_pages_timestamp),]
+```
+
+- Keep only one record for student (the latest one)
+
+```{r}
+white_pages_onentry <- white_pages %>% dplyr::group_by(NameFolder) %>%
+  filter(thetimes == max(thetimes))
+white_pages <- white_pages_onentry
+```
+
+# Export students photos
+ 
+```{r export_photo}
+filesToExport <- melt(white_pages[, c("record_id", "first_name","last_name","photo_upload")], c("record_id","first_name","last_name"),na.rm=TRUE)
+
+for(i in 1:nrow(filesToExport)){
+  
+  name_surname <- paste(filesToExport$first_name[i],filesToExport$last_name[i],sep="_")
+
+  # create a single directory for every student
+  dir.create(file.path(dirAppBackupImages,name_surname),showWarnings = FALSE,recursive = TRUE)
+
+  exportFiles(rcon,  
+              record=as.numeric(filesToExport$record_id[i]),
+              field=as.character(filesToExport$variable[i]),
+              dir = file.path(dirAppBackupImages,name_surname))
+  
+  PhotoName <- list.files(file.path(dirAppBackupImages,name_surname),full.names = TRUE)
+  white_pages$PhotoName[white_pages$record_id == filesToExport$record_id[i]] <- as.character(PhotoName)
+  
+  # Create Student profile with people's page generator
+  rmarkdown::render(input=file.path(dirApp,"people_page_generator.Rmd"),
+          output_file  = file.path(dirAppBackupImages,name_surname,"student_profile"),
+          params = list(name = gsub("_"," ",name_surname)))
+}
+```
+
+
+```{r save_and_copy_to_main}
+# Save data
+write.csv(white_pages,file.path(dirAppBackupDate,"WhitePagesData.csv"),row.names = FALSE)
+
+# Move data to main App folder
+dirAppData <- "/Users/quaglieri.a/WhitePages/WhitePagesApp/data"
+from <- file.path(file.path(dirAppBackupDate,"WhitePagesData.csv"))
+to <- file.path(dirAppData,"WhitePagesData.csv")
+file.copy(from,to)
+
+# Move photos to main App folder
+dirAppImages <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/images"
+from <- file.path(file.path(dirAppBackupDate,"images"))
+to <- file.path(dirApp)
+file.copy(from,to,recursive = TRUE)
+
+# Do it in the server
+# Change colnames
+#colnames(white_pages) <- c("record_id","redcap_survey_identifier","wehi_white_pages_timestamp",
+#                           "First name","Last name","Lab","Division","Contact email","Areas of interest or expertise",
+#                           "Lab skills","Equipment experience","Software experience","Hobbies/Interests","wehi_white_pages_complete","photo_upload","wehi_white_pages_complete","PhotoName")
+
+#white_pages <- white_pages[,colnames(white_pages)[!(colnames(white_pages) %in%
+#c("record_id","redcap_survey_identifier","wehi_white_pages_timestamp","wehi_white_pages_complete"))]]
+
+```
+
+# Data Stats
+
+In the backedup **White Pages** on the `r Sys.Date()` there are `r nrow(white_pages)` entries and `r ncol(white_pages)` columns.
+
+The full **White Pages** is printed below.
+
+```{r}
+kable(white_pages)
+```
+
+

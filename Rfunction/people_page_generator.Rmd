@@ -1,0 +1,70 @@
+---
+output:
+  github_document:
+  html_document:
+    df_print: paged
+params:
+  name: ''
+---
+
+```{r setup,include=TRUE,echo=FALSE,message=FALSE,cache=FALSE}
+# output: github_document
+
+# title: "`r params$name`"
+library(png)
+library(grid)
+library(readr)
+
+# input name
+name <- params$name
+namePhotoDir <- gsub(" ","_",name)
+dirApp <- "/Users/quaglieri.a/WhitePages/WhitePagesApp"
+date <- Sys.Date()
+backup_dir <- file.path(dirApp,"backedup_files",date)
+
+# deatails
+white_pages <- read.csv(file.path(dirApp,"data","WhitePagesData.csv"))
+white_pages$Name <- paste(white_pages$first_name,white_pages$last_name)
+white_name <- subset(white_pages,Name %in% name)
+```
+
+## `r name`
+
+```{r echo=FALSE,warning=FALSE,fig.width=4,fig.height=3,fig.align="left"}
+file_png <- list.files(file.path(backup_dir,"images",namePhotoDir),full.names = TRUE)
+img <- try(readPNG(file_png),silent = TRUE)
+
+if(class(img) == "array"){
+grid.raster(img)}
+```
+
+
+### Contact details
+
+- **Lab**: `r ifelse(is.na(white_name$lab),"Not available",as.character(white_name$lab))`
+- **Division**: `r ifelse(is.na(white_name$division),"Not available",as.character(white_name$division))`
+- **Contact email**: `r ifelse(is.na(white_name$contact_email),"Not available",as.character(white_name$contact_email))`
+
+### Equipment experience
+
+`r ifelse(is.na(white_name$areas_of_interest_or_exper),"Not available",as.character(white_name$areas_of_interest_or_exper))`
+
+### Lab skills
+
+`r ifelse(is.na(white_name$lab_skills),"Not available",as.character(white_name$lab_skills))`
+
+### Equipment experience
+
+`r ifelse(is.na(white_name$equipment_experience),"Not available",as.character(white_name$equipment_experience))`
+
+### Software experience
+
+`r ifelse(is.na(white_name$software_experience),"Not available",as.character(white_name$software_experience))`
+
+### Professional development
+
+`r ifelse(is.na(white_name$prof_development),"Not available",as.character(white_name$prof_development))`
+
+### Hobbies/Interests
+
+`r ifelse(is.na(white_name$hobbies_interests),"Not available",as.character(white_name$hobbies_interests))`
