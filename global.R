@@ -16,6 +16,7 @@ dirAppData <- "/Users/quaglieri.a/WhitePages/WhitePagesApp/data"
 dirAppImages <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/images"
 ## R function
 dirRfunctions <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/Rfunction"
+dirPages <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/pages"
 
 # Read in Data
 white_pages <- read.csv(file.path(dirAppData,"WhitePagesData.csv"))
@@ -39,6 +40,10 @@ c("record_id","redcap_survey_identifier","wehi_white_pages_timestamp","wehi_whit
 
 # Dataset to display
 white_pages_display <- white_pages[,!(colnames(white_pages) %in% c("PhotoName","dtimes","thetimes","NameFolder"))]
+
+# white oages default student profile
+white_pages_display <- rbind(white_pages_display,NA)
+white_pages_display$NameDisplay <- ifelse(is.na(white_pages_display$NameDisplay), " ", as.character(white_pages_display$NameDisplay))
 
 # Home 'Student Profiles' 'About' 'How to'
 

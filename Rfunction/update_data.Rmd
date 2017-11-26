@@ -104,7 +104,7 @@ thetimes = chron(dates=dtparts[,1],times=dtparts[,2],
 white_pages$thetimes <- thetimes
 ```
 
-## Entried with timestamp NA are removed
+## Entries with timestamp NA are removed
 
 ```{r}
 white_pages[is.na(white_pages$wehi_white_pages_timestamp),]
@@ -119,6 +119,15 @@ white_pages <- white_pages_onentry
 
 table(white_pages$NameDisplay)
 table(white_pages$NameDisplay)[table(white_pages$NameDisplay) >1]
+```
+
+## Entries with Name or Surname NA are removed
+
+```{r}
+# subjects to be removed
+nrow(subset(white_pages,is.na(first_name) | is.na(last_name)))
+
+white_pages <- subset(white_pages,!is.na(white_pages$first_name) | !is.na(white_pages$last_name))
 ```
 
 # Export students photos

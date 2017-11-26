@@ -4,7 +4,7 @@ ui <- navbarPage("WEHI White Pages",theme = shinytheme("flatly"),
                  tabPanel("White Pages",
                           fluidRow(
                             column(2,
-                                   includeMarkdown(file.path(dirRfunctions,"white_pages.md"))
+                                   includeMarkdown(file.path(dirPages,"white_pages.md"))
                             ),
                             
                             column(10,
@@ -17,8 +17,9 @@ ui <- navbarPage("WEHI White Pages",theme = shinytheme("flatly"),
                           sidebarLayout(
                             sidebarPanel(
                               # Input: Choose Name
-                              selectInput("name", "Choose a name:",
-                                          choices = white_pages$NameDisplay)
+                              selectInput("name", "Choose a name:",selected = " ",
+                                          choices = white_pages_display$NameDisplay,
+                                          selectize=TRUE)
                             ),
                             
                             mainPanel(
