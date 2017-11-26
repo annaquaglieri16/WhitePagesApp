@@ -4,34 +4,29 @@ output:
   html_document:
     df_print: paged
 params:
-  name: ''
+  white_name: ''
 ---
 
 ```{r setup,include=TRUE,echo=FALSE,message=FALSE,cache=FALSE}
-# output: github_document
-
-# title: "`r params$name`"
 library(png)
 library(grid)
 library(readr)
 
 # input name
-name <- params$name
-namePhotoDir <- gsub(" ","_",name)
-dirApp <- "/Users/quaglieri.a/WhitePages/WhitePagesApp"
-date <- Sys.Date()
-backup_dir <- file.path(dirApp,"backedup_files",date)
+white_name <- params$white_name
+NameFolder <- white_name$NameFolder
 
-# deatails
-white_pages <- read.csv(file.path(dirApp,"data","WhitePagesData.csv"))
-white_pages$Name <- paste(white_pages$first_name,white_pages$last_name)
-white_name <- subset(white_pages,Name %in% name)
+# dirBackup
+date <- Sys.Date()
+dirAppBackup <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files"
+dirAppBackupDate <- file.path(dirAppBackup,date)
+dirAppBackupImages <- file.path(dirAppBackupDate,"images")
 ```
 
-## `r name`
+## `r white_name$NameDisplay`
 
-```{r echo=FALSE,warning=FALSE,fig.width=4,fig.height=3,fig.align="left"}
-file_png <- list.files(file.path(backup_dir,"images",namePhotoDir),full.names = TRUE)
+```{r white_name$NameFolder,echo=FALSE,warning=FALSE,fig.width=4,fig.height=3,fig.align="left"}
+file_png <- list.files(file.path(dirAppBackupImages,NameFolder),full.names = TRUE)
 img <- try(readPNG(file_png),silent = TRUE)
 
 if(class(img) == "array"){

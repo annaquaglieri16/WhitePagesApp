@@ -22,6 +22,10 @@ library(knitr)
 library(chron)
 
 # Directories
+# Dir of the App
+dirApp <- "/Users/quaglieri.a/WhitePages/WhitePagesApp"
+dirRfunctions <- "/Users/quaglieri.a/WhitePages/WhitePagesApp/Rfunction"
+
 # create backup folder with a specific date
 date <- Sys.Date()
 dirAppBackup <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files"
@@ -31,9 +35,6 @@ dir.create(dirAppBackupDate,showWarnings = FALSE,recursive = TRUE)
 # Students' photos directory
 dirAppBackupImages <- file.path(dirAppBackupDate,"images")
 dir.create(dirAppBackupImages,showWarnings = FALSE,recursive = TRUE)
-
-# Dir of the App
-dirApp <- "/Users/quaglieri.a/WhitePages/WhitePagesApp"
 ```
 
 # Dowload from API
@@ -115,6 +116,9 @@ white_pages[is.na(white_pages$wehi_white_pages_timestamp),]
 white_pages_onentry <- white_pages %>% dplyr::group_by(NameFolder) %>%
   filter(thetimes == max(thetimes))
 white_pages <- white_pages_onentry
+
+table(white_pages$NameDisplay)
+table(white_pages$NameDisplay)[table(white_pages$NameDisplay) >1]
 ```
 
 # Export students photos
@@ -127,7 +131,8 @@ for(i in 1:nrow(filesToExport)){
   name_surname <- paste(filesToExport$first_name[i],filesToExport$last_name[i],sep="_")
 
   # create a single directory for every student
-  dir.create(file.path(dirAppBackupImages,name_surname),showWarnings = FALSE,recursive = TRUE)
+  dir.create(file.path(dirAppBackupImages,name_surname),
+             showWarnings = FALSE,recursive = TRUE)
 
   exportFiles(rcon,  
               record=as.numeric(filesToExport$record_id[i]),
@@ -136,11 +141,23 @@ for(i in 1:nrow(filesToExport)){
   
   PhotoName <- list.files(file.path(dirAppBackupImages,name_surname),full.names = TRUE)
   white_pages$PhotoName[white_pages$record_id == filesToExport$record_id[i]] <- as.character(PhotoName)
+}
+```
+
+# Create students profiles in the same folder as the student photo
+
+```{r include=FALSE}
+for(i in 1:nrow(white_pages)){
+
+  name_surname <- as.character(white_pages$NameFolder[i])
+  print(name_surname)
+  dir.create(file.path(dirAppBackupImages,name_surname),
+             recursive = TRUE,showWarnings = FALSE)
   
   # Create Student profile with people's page generator
-  rmarkdown::render(input=file.path(dirApp,"people_page_generator.Rmd"),
-          output_file  = file.path(dirAppBackupImages,name_surname,"student_profile"),
-          params = list(name = gsub("_"," ",name_surname)))
+  rmarkdown::render(input=file.path(dirRfunctions,"people_page_generator.Rmd"),
+          output_file  = file.path(dirAppBackupImages,name_surname,"student_profile.md"),
+          params = list(white_name = white_pages[white_pages$NameFolder %in% name_surname,]))
 }
 ```
 
@@ -153,22 +170,13 @@ write.csv(white_pages,file.path(dirAppBackupDate,"WhitePagesData.csv"),row.names
 dirAppData <- "/Users/quaglieri.a/WhitePages/WhitePagesApp/data"
 from <- file.path(file.path(dirAppBackupDate,"WhitePagesData.csv"))
 to <- file.path(dirAppData,"WhitePagesData.csv")
-file.copy(from,to)
+file.copy(from,to,overwrite = TRUE)
 
 # Move photos to main App folder
 dirAppImages <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/images"
 from <- file.path(file.path(dirAppBackupDate,"images"))
 to <- file.path(dirApp)
-file.copy(from,to,recursive = TRUE)
-
-# Do it in the server
-# Change colnames
-#colnames(white_pages) <- c("record_id","redcap_survey_identifier","wehi_white_pages_timestamp",
-#                           "First name","Last name","Lab","Division","Contact email","Areas of interest or expertise",
-#                           "Lab skills","Equipment experience","Software experience","Hobbies/Interests","wehi_white_pages_complete","photo_upload","wehi_white_pages_complete","PhotoName")
-
-#white_pages <- white_pages[,colnames(white_pages)[!(colnames(white_pages) %in%
-#c("record_id","redcap_survey_identifier","wehi_white_pages_timestamp","wehi_white_pages_complete"))]]
+file.copy(from,to,recursive = TRUE,overwrite = TRUE)
 
 ```
 
@@ -182,4 +190,10 @@ The full **White Pages** is printed below.
 kable(white_pages)
 ```
 
+- List of people present in the student's folder
+
+
+```{r}
+list.files(dirAppBackupImages,recursive = TRUE)
+```
 

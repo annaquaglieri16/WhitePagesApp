@@ -14,6 +14,8 @@ dirApp <- "/Users/quaglieri.a/WhitePages/WhitePagesApp"
 dirAppData <- "/Users/quaglieri.a/WhitePages/WhitePagesApp/data"
 ## Folder where student photos are saved
 dirAppImages <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/images"
+## R function
+dirRfunctions <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/Rfunction"
 
 # Read in Data
 white_pages <- read.csv(file.path(dirAppData,"WhitePagesData.csv"))
@@ -35,9 +37,8 @@ colnames(white_pages)[colnames(white_pages) %in% "hobbies_interests"] <- "Hobbie
 white_pages <- white_pages[,colnames(white_pages)[!(colnames(white_pages) %in%
 c("record_id","redcap_survey_identifier","wehi_white_pages_timestamp","wehi_white_pages_complete","photo_upload"))]]
 
-white_pages$Name <- paste(white_pages$`First name`,white_pages$`Last name`)
-
-white_pages_display <- white_pages[,!(colnames(white_pages) %in% "PhotoName")]
+# Dataset to display
+white_pages_display <- white_pages[,!(colnames(white_pages) %in% c("PhotoName","dtimes","thetimes","NameFolder"))]
 
 # Home 'Student Profiles' 'About' 'How to'
 

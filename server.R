@@ -2,13 +2,20 @@
 server <- function(input, output) {
   
   # choose columns to display
-  output$mytable1 <- DT::renderDataTable(data.frame(white_pages_display),options = list(pageLength=10))
+  output$mytable1 <- DT::renderDataTable(
+    data.frame(white_pages_display[!(colnames(white_pages_display) %in% "NameDisplay")]),
+    options = list(pageLength=10))
   
   ###############
   # People's page
   
-  output$text_name <- renderText({
-    input$name
+  output$student_profile <- renderUI({
+    file <- file.path(dirAppImages,gsub(" ","_",input$name),"student_profile.md")
+    includeMarkdown(file)
+  })
+  
+  output$acc <- renderText({
+    file.path(dirAppImages,gsub(" ","_",input$name),"student_profile.md")
   })
   
   output$image_person <- renderPlot({

@@ -333,22 +333,74 @@ white_pages$software_experience &lt;- gsub(&quot;, ,&quot;, &quot;,&quot;, white
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="export-students-photos" class="section level1">
-<h1><span class="header-section-number">3</span> Export students photos</h1>
+<div id="remove-duplicated-entries-for-students" class="section level1">
+<h1><span class="header-section-number">3</span> Remove duplicated entries for students</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbImZpbGVzVG9FeHBvcnQgPC0gbWVsdCh3aGl0ZV9wYWdlc1ssIGMoXCJyZWNvcmRfaWRcIiwgXCJmaXJzdF9uYW1lXCIsIFwibGFzdF9uYW1lXCIsIFxuICAgIFwicGhvdG9fdXBsb2FkXCIpXSwgYyhcInJlY29yZF9pZFwiLCBcImZpcnN0X25hbWVcIiwgXCJsYXN0X25hbWVcIiksIG5hLnJtID0gVFJVRSkiLCIiLCIjIGNyZWF0ZSBiYWNrdXAgZm9sZGVyIHdpdGggYSBzcGVjaWZpYyBkYXRlIiwiZGF0ZSA8LSBTeXMuRGF0ZSgpIiwiYmFja3VwX2RpciA8LSBmaWxlLnBhdGgoZGlyQXBwLCBcImJhY2tlZHVwX2ZpbGVzXCIsIGRhdGUpIiwiZGlyLmNyZWF0ZShiYWNrdXBfZGlyLCBzaG93V2FybmluZ3MgPSBGQUxTRSwgcmVjdXJzaXZlID0gVFJVRSkiLCIiLCIjIFN0dWRlbnRzJyBwaG90b3MgZGlyZWN0b3J5IiwiaW1hZ2VzRGlyIDwtIGZpbGUucGF0aChiYWNrdXBfZGlyLCBcImltYWdlc1wiKSIsImRpci5jcmVhdGUoaW1hZ2VzRGlyLCBzaG93V2FybmluZ3MgPSBGQUxTRSwgcmVjdXJzaXZlID0gVFJVRSkiLCIiLCJmb3IgKGkgaW4gMTpucm93KGZpbGVzVG9FeHBvcnQpKSB7XG4gICAgXG4gICAgbmFtZV9zdXJuYW1lIDwtIHBhc3RlKGZpbGVzVG9FeHBvcnQkZmlyc3RfbmFtZVtpXSwgZmlsZXNUb0V4cG9ydCRsYXN0X25hbWVbaV0sIFxuICAgICAgICBzZXAgPSBcIl9cIilcbiAgICBcbiAgICAjIGNyZWF0ZSBhIHNpbmdsZSBkaXJlY3RvcnkgZm9yIGV2ZXJ5IHN0dWRlbnRcbiAgICBkaXIuY3JlYXRlKGZpbGUucGF0aChpbWFnZXNEaXIsIG5hbWVfc3VybmFtZSksIHNob3dXYXJuaW5ncyA9IEZBTFNFLCByZWN1cnNpdmUgPSBUUlVFKVxuICAgIFxuICAgIGV4cG9ydEZpbGVzKHJjb24sIHJlY29yZCA9IGFzLm51bWVyaWMoZmlsZXNUb0V4cG9ydCRyZWNvcmRfaWRbaV0pLCBmaWVsZCA9IGFzLmNoYXJhY3RlcihmaWxlc1RvRXhwb3J0JHZhcmlhYmxlW2ldKSwgXG4gICAgICAgIGRpciA9IGZpbGUucGF0aChpbWFnZXNEaXIsIG5hbWVfc3VybmFtZSkpXG4gICAgXG4gICAgUGhvdG9OYW1lIDwtIGxpc3QuZmlsZXMoZmlsZS5wYXRoKGltYWdlc0RpciwgbmFtZV9zdXJuYW1lKSwgZnVsbC5uYW1lcyA9IFRSVUUpXG4gICAgd2hpdGVfcGFnZXMkUGhvdG9OYW1lW3doaXRlX3BhZ2VzJHJlY29yZF9pZCA9PSBmaWxlc1RvRXhwb3J0JHJlY29yZF9pZFtpXV0gPC0gYXMuY2hhcmFjdGVyKFBob3RvTmFtZSlcbiAgICBcbiAgICAjIENyZWF0ZSBTdHVkZW50IHByb2ZpbGUgd2l0aCBwZW9wbGUncyBwYWdlIGdlbmVyYXRvclxuICAgIHJtYXJrZG93bjo6cmVuZGVyKGlucHV0ID0gZmlsZS5wYXRoKGRpckFwcCwgXCJwZW9wbGVfcGFnZV9nZW5lcmF0b3IuUm1kXCIpLCBcbiAgICAgICAgb3V0cHV0X2ZpbGUgPSBmaWxlLnBhdGgoaW1hZ2VzRGlyLCBuYW1lX3N1cm5hbWUsIFwic3R1ZGVudF9wcm9maWxlXCIpLCBcbiAgICAgICAgcGFyYW1zID0gbGlzdChuYW1lID0gZ3N1YihcIl9cIiwgXCIgXCIsIG5hbWVfc3VybmFtZSkpKVxuICAgICMgQ3JlYXRlIFN0dWRlbnQgcHJvZmlsZSB3aXRoIHBlb3BsZSdzIHBhZ2UgZ2VuZXJhdG9yXG4gICAgIyBybWFya2Rvd246OnJlbmRlcihpbnB1dD1maWxlLnBhdGgoZGlyQXBwLCdwZW9wbGVfcGFnZV9nZW5lcmF0b3IuUm1kJyksXG4gICAgIyBvdXRwdXRfZmlsZSA9IGZpbGUucGF0aChpbWFnZXNEaXIsbmFtZV9zdXJuYW1lLCdzdHVkZW50X3Byb2ZpbGUubWQnKSxcbiAgICAjIHBhcmFtcyA9IGxpc3QobmFtZSA9IGdzdWIoJ18nLCcgJyxuYW1lX3N1cm5hbWUpKSlcbn0iXX0= -->
+<!-- rnb-source-begin eyJkYXRhIjpbIiMgTmFtZSBmb3IgZm9sZGVyIHdpdGggXyBiZXR3ZWVuIE5hbWUgYW5kIFN1cm5hbWUgTmFtZSBmb3IgZGlzcGxheSIsIndoaXRlX3BhZ2VzJE5hbWVGb2xkZXIgPC0gcGFzdGUod2hpdGVfcGFnZXMkZmlyc3RfbmFtZSwgd2hpdGVfcGFnZXMkbGFzdF9uYW1lLCBcbiAgICBzZXAgPSBcIl9cIikiLCJ3aGl0ZV9wYWdlcyROYW1lRGlzcGxheSA8LSBwYXN0ZSh3aGl0ZV9wYWdlcyRmaXJzdF9uYW1lLCB3aGl0ZV9wYWdlcyRsYXN0X25hbWUpIiwiIiwiIyBDb252ZXJ0IHdlaGlfd2hpdGVfcGFnZXNfdGltZXN0YW1wIGludG8gZGF0ZSBhbmQgdGltZSIsIndoaXRlX3BhZ2VzJGR0aW1lcyA8LSB3aGl0ZV9wYWdlcyR3ZWhpX3doaXRlX3BhZ2VzX3RpbWVzdGFtcCIsImR0cGFydHMgPSB0KGFzLmRhdGEuZnJhbWUoc3Ryc3BsaXQoYXMuY2hhcmFjdGVyKHdoaXRlX3BhZ2VzJGR0aW1lcyksIFwiIFwiKSkpIiwicm93Lm5hbWVzKGR0cGFydHMpID0gTlVMTCIsInRoZXRpbWVzID0gY2hyb24oZGF0ZXMgPSBkdHBhcnRzWywgMV0sIHRpbWVzID0gZHRwYXJ0c1ssIDJdLCBmb3JtYXQgPSBjKFwieS1tLWRcIiwgXG4gICAgXCJoOm06c1wiKSkiLCJ3aGl0ZV9wYWdlcyR0aGV0aW1lcyA8LSB0aGV0aW1lcyJdfQ== -->
+<pre class="r"><code># Name for folder with _ between Name and Surname Name for display
+white_pages$NameFolder &lt;- paste(white_pages$first_name, white_pages$last_name, 
+    sep = &quot;_&quot;)
+white_pages$NameDisplay &lt;- paste(white_pages$first_name, white_pages$last_name)
+
+# Convert wehi_white_pages_timestamp into date and time
+white_pages$dtimes &lt;- white_pages$wehi_white_pages_timestamp
+dtparts = t(as.data.frame(strsplit(as.character(white_pages$dtimes), &quot; &quot;)))
+row.names(dtparts) = NULL
+thetimes = chron(dates = dtparts[, 1], times = dtparts[, 2], format = c(&quot;y-m-d&quot;, 
+    &quot;h:m:s&quot;))
+white_pages$thetimes &lt;- thetimes</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="entried-with-timestamp-na-are-removed" class="section level2">
+<h2><span class="header-section-number">3.1</span> Entried with timestamp NA are removed</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoid2hpdGVfcGFnZXNbaXMubmEod2hpdGVfcGFnZXMkd2VoaV93aGl0ZV9wYWdlc190aW1lc3RhbXApLCBdIn0= -->
+<pre class="r"><code>white_pages[is.na(white_pages$wehi_white_pages_timestamp), ]</code></pre>
+<!-- rnb-source-end -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["record_id"],"name":[1],"type":["S3: labelled"],"align":["right"]},{"label":["redcap_survey_identifier"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["wehi_white_pages_timestamp"],"name":[3],"type":["chr"],"align":["left"]},{"label":["first_name"],"name":[4],"type":["S3: labelled"],"align":["right"]},{"label":["last_name"],"name":[5],"type":["S3: labelled"],"align":["right"]},{"label":["lab"],"name":[6],"type":["S3: labelled"],"align":["right"]},{"label":["division"],"name":[7],"type":["S3: labelled"],"align":["right"]},{"label":["contact_email"],"name":[8],"type":["S3: labelled"],"align":["right"]},{"label":["areas_of_interest_or_exper"],"name":[9],"type":["S3: labelled"],"align":["right"]},{"label":["lab_skills"],"name":[10],"type":["chr"],"align":["left"]},{"label":["equipment_experience"],"name":[11],"type":["S3: labelled"],"align":["right"]},{"label":["software_experience"],"name":[12],"type":["S3: labelled"],"align":["right"]},{"label":["prof_development"],"name":[13],"type":["S3: labelled"],"align":["right"]},{"label":["hobbies_interests"],"name":[14],"type":["S3: labelled"],"align":["right"]},{"label":["photo_upload"],"name":[15],"type":["S3: labelled"],"align":["right"]},{"label":["wehi_white_pages_complete"],"name":[16],"type":["int"],"align":["right"]},{"label":["PhotoName"],"name":[17],"type":["lgl"],"align":["right"]},{"label":["NameFolder"],"name":[18],"type":["chr"],"align":["left"]},{"label":["NameDisplay"],"name":[19],"type":["chr"],"align":["left"]},{"label":["dtimes"],"name":[20],"type":["chr"],"align":["left"]},{"label":["thetimes"],"name":[21],"type":["S3: chron"],"align":["right"]}],"data":[{"1":"1","2":"NA","3":"NA","4":"Si","5":"Foroughi","6":"Gibbs","7":"NA","8":"foroughi@wehi.edu.au","9":"Clinical research, biomarker discovery, clinical data capture and management, colorectal cancer, EGFR ligands, IHC","10":"NA","11":"Ventana Benchmark Ultra, Ventana iScan HT","12":"NA","13":"NA","14":"NHL (Go Oilers!), cars (Porche's!), tennis, travelling, live music","15":"NA","16":"2","17":"NA","18":"Si_Foroughi","19":"Si Foroughi","20":"NA","21":"(NA NA)","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ul>
+<li>Keep only one record for student (the latest one)</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjpbIndoaXRlX3BhZ2VzX29uZW50cnkgPC0gd2hpdGVfcGFnZXMgJT4lIGRwbHlyOjpncm91cF9ieShOYW1lRm9sZGVyKSAlPiUgZmlsdGVyKHRoZXRpbWVzID09IFxuICAgIG1heCh0aGV0aW1lcykpIiwid2hpdGVfcGFnZXMgPC0gd2hpdGVfcGFnZXNfb25lbnRyeSIsIiIsInRhYmxlKHdoaXRlX3BhZ2VzJE5hbWVEaXNwbGF5KSJdfQ== -->
+<pre class="r"><code>white_pages_onentry &lt;- white_pages %&gt;% dplyr::group_by(NameFolder) %&gt;% filter(thetimes == 
+    max(thetimes))
+white_pages &lt;- white_pages_onentry
+
+table(white_pages$NameDisplay)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG4gQW5uYSBRdWFnbGllcmkgICAgQ2FsZWIgRGF3c29uICAgIEphbWVzIENvb25leSBOaWNvbGUgTWNLZW56aWUgXG4gICAgICAgICAgICAgIDEgICAgICAgICAgICAgICAxICAgICAgICAgICAgICAgMSAgICAgICAgICAgICAgIDEgXG4ifQ== -->
+<pre><code>
+ Anna Quaglieri    Caleb Dawson    James Cooney Nicole McKenzie 
+              1               1               1               1 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoidGFibGUod2hpdGVfcGFnZXMkTmFtZURpc3BsYXkpW3RhYmxlKHdoaXRlX3BhZ2VzJE5hbWVEaXNwbGF5KSA+IDFdIn0= -->
+<pre class="r"><code>table(white_pages$NameDisplay)[table(white_pages$NameDisplay) &gt; 1]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoibmFtZWQgaW50ZWdlcigwKVxuIn0= -->
+<pre><code>named integer(0)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="export-students-photos" class="section level1">
+<h1><span class="header-section-number">4</span> Export students photos</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjpbImZpbGVzVG9FeHBvcnQgPC0gbWVsdCh3aGl0ZV9wYWdlc1ssIGMoXCJyZWNvcmRfaWRcIiwgXCJmaXJzdF9uYW1lXCIsIFwibGFzdF9uYW1lXCIsIFxuICAgIFwicGhvdG9fdXBsb2FkXCIpXSwgYyhcInJlY29yZF9pZFwiLCBcImZpcnN0X25hbWVcIiwgXCJsYXN0X25hbWVcIiksIG5hLnJtID0gVFJVRSkiLCIiLCJmb3IgKGkgaW4gMTpucm93KGZpbGVzVG9FeHBvcnQpKSB7XG4gICAgXG4gICAgbmFtZV9zdXJuYW1lIDwtIHBhc3RlKGZpbGVzVG9FeHBvcnQkZmlyc3RfbmFtZVtpXSwgZmlsZXNUb0V4cG9ydCRsYXN0X25hbWVbaV0sIFxuICAgICAgICBzZXAgPSBcIl9cIilcbiAgICBcbiAgICAjIGNyZWF0ZSBhIHNpbmdsZSBkaXJlY3RvcnkgZm9yIGV2ZXJ5IHN0dWRlbnRcbiAgICBkaXIuY3JlYXRlKGZpbGUucGF0aChkaXJBcHBCYWNrdXBJbWFnZXMsIG5hbWVfc3VybmFtZSksIHNob3dXYXJuaW5ncyA9IEZBTFNFLCBcbiAgICAgICAgcmVjdXJzaXZlID0gVFJVRSlcbiAgICBcbiAgICBleHBvcnRGaWxlcyhyY29uLCByZWNvcmQgPSBhcy5udW1lcmljKGZpbGVzVG9FeHBvcnQkcmVjb3JkX2lkW2ldKSwgZmllbGQgPSBhcy5jaGFyYWN0ZXIoZmlsZXNUb0V4cG9ydCR2YXJpYWJsZVtpXSksIFxuICAgICAgICBkaXIgPSBmaWxlLnBhdGgoZGlyQXBwQmFja3VwSW1hZ2VzLCBuYW1lX3N1cm5hbWUpKVxuICAgIFxuICAgIFBob3RvTmFtZSA8LSBsaXN0LmZpbGVzKGZpbGUucGF0aChkaXJBcHBCYWNrdXBJbWFnZXMsIG5hbWVfc3VybmFtZSksIGZ1bGwubmFtZXMgPSBUUlVFKVxuICAgIHdoaXRlX3BhZ2VzJFBob3RvTmFtZVt3aGl0ZV9wYWdlcyRyZWNvcmRfaWQgPT0gZmlsZXNUb0V4cG9ydCRyZWNvcmRfaWRbaV1dIDwtIGFzLmNoYXJhY3RlcihQaG90b05hbWUpXG59Il19 -->
 <pre class="r"><code>filesToExport &lt;- melt(white_pages[, c(&quot;record_id&quot;, &quot;first_name&quot;, &quot;last_name&quot;, 
     &quot;photo_upload&quot;)], c(&quot;record_id&quot;, &quot;first_name&quot;, &quot;last_name&quot;), na.rm = TRUE)
-
-# create backup folder with a specific date
-date &lt;- Sys.Date()
-backup_dir &lt;- file.path(dirApp, &quot;backedup_files&quot;, date)
-dir.create(backup_dir, showWarnings = FALSE, recursive = TRUE)
-
-# Students' photos directory
-imagesDir &lt;- file.path(backup_dir, &quot;images&quot;)
-dir.create(imagesDir, showWarnings = FALSE, recursive = TRUE)
 
 for (i in 1:nrow(filesToExport)) {
     
@@ -356,22 +408,14 @@ for (i in 1:nrow(filesToExport)) {
         sep = &quot;_&quot;)
     
     # create a single directory for every student
-    dir.create(file.path(imagesDir, name_surname), showWarnings = FALSE, recursive = TRUE)
+    dir.create(file.path(dirAppBackupImages, name_surname), showWarnings = FALSE, 
+        recursive = TRUE)
     
     exportFiles(rcon, record = as.numeric(filesToExport$record_id[i]), field = as.character(filesToExport$variable[i]), 
-        dir = file.path(imagesDir, name_surname))
+        dir = file.path(dirAppBackupImages, name_surname))
     
-    PhotoName &lt;- list.files(file.path(imagesDir, name_surname), full.names = TRUE)
+    PhotoName &lt;- list.files(file.path(dirAppBackupImages, name_surname), full.names = TRUE)
     white_pages$PhotoName[white_pages$record_id == filesToExport$record_id[i]] &lt;- as.character(PhotoName)
-    
-    # Create Student profile with people's page generator
-    rmarkdown::render(input = file.path(dirApp, &quot;people_page_generator.Rmd&quot;), 
-        output_file = file.path(imagesDir, name_surname, &quot;student_profile&quot;), 
-        params = list(name = gsub(&quot;_&quot;, &quot; &quot;, name_surname)))
-    # Create Student profile with people's page generator
-    # rmarkdown::render(input=file.path(dirApp,'people_page_generator.Rmd'),
-    # output_file = file.path(imagesDir,name_surname,'student_profile.md'),
-    # params = list(name = gsub('_',' ',name_surname)))
 }</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-message-begin eyJkYXRhIjoiVGhlIGZpbGUgd2FzIHNhdmVkIHRvICc2LS1TY3JlZW4gU2hvdCAyMDE3LTExLTIxIGF0IDMuNDcuMTUgcG0ucG5nJ1xuIn0= -->
@@ -382,109 +426,44 @@ for (i in 1:nrow(filesToExport)) {
 $record_id[i]] &lt;- as.character(PhotoName): number of items to replace is
 not a multiple of replacement length</code></pre>
 <!-- rnb-warning-end -->
-<!-- rnb-message-begin eyJkYXRhIjoiXG5cbnByb2Nlc3NpbmcgZmlsZTogcGVvcGxlX3BhZ2VfZ2VuZXJhdG9yLlJtZFxuIn0= -->
-<pre><code>
-
-processing file: people_page_generator.Rmd</code></pre>
-<!-- rnb-message-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXHIgIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxyICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMCVcciAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXHIgIHwuLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDIwJVxuICBvcmRpbmFyeSB0ZXh0IHdpdGhvdXQgUiBjb2RlXG5cblxyICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcciAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgNDAlXG5sYWJlbDogc2V0dXAgKHdpdGggb3B0aW9ucykgXG5MaXN0IG9mIDRcbiAkIGluY2x1ZGU6IGxvZ2kgVFJVRVxuICQgZWNobyAgIDogbG9naSBGQUxTRVxuICQgbWVzc2FnZTogbG9naSBGQUxTRVxuICQgY2FjaGUgIDogbG9naSBGQUxTRVxuXG5cciAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXHIgIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDYwJVxuICAgaW5saW5lIFIgY29kZSBmcmFnbWVudHNcblxuXHIgIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxyICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICB8ICA4MCVcbmxhYmVsOiB1bm5hbWVkLWNodW5rLTMgKHdpdGggb3B0aW9ucykgXG5MaXN0IG9mIDVcbiAkIGVjaG8gICAgICA6IGxvZ2kgRkFMU0VcbiAkIHdhcm5pbmcgICA6IGxvZ2kgRkFMU0VcbiAkIGZpZy53aWR0aCA6IG51bSA0XG4gJCBmaWcuaGVpZ2h0OiBudW0gM1xuICQgZmlnLmFsaWduIDogY2hyIFwibGVmdFwiXG5cblxyICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcciAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4ufCAxMDAlXG4gICBpbmxpbmUgUiBjb2RlIGZyYWdtZW50c1xuIn0= -->
-<pre><code>
-  |                                                                       
-  |                                                                 |   0%
-  |                                                                       
-  |.............                                                    |  20%
-  ordinary text without R code
-
-
-  |                                                                       
-  |..........................                                       |  40%
-label: setup (with options) 
-List of 4
- $ include: logi TRUE
- $ echo   : logi FALSE
- $ message: logi FALSE
- $ cache  : logi FALSE
-
-
-  |                                                                       
-  |.......................................                          |  60%
-   inline R code fragments
-
-
-  |                                                                       
-  |....................................................             |  80%
-label: unnamed-chunk-3 (with options) 
-List of 5
- $ echo      : logi FALSE
- $ warning   : logi FALSE
- $ fig.width : num 4
- $ fig.height: num 3
- $ fig.align : chr &quot;left&quot;
-
-
-  |                                                                       
-  |.................................................................| 100%
-   inline R code fragments</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-message-begin eyJkYXRhIjoib3V0cHV0IGZpbGU6IHBlb3BsZV9wYWdlX2dlbmVyYXRvci5rbml0Lm1kXG4ifQ== -->
-<pre><code>output file: people_page_generator.knit.md</code></pre>
-<!-- rnb-message-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiL0FwcGxpY2F0aW9ucy9SU3R1ZGlvLmFwcC9Db250ZW50cy9NYWNPUy9wYW5kb2MvcGFuZG9jICtSVFMgLUs1MTJtIC1SVFMgcGVvcGxlX3BhZ2VfZ2VuZXJhdG9yLnV0ZjgubWQgLS10byBtYXJrZG93bl9naXRodWItYXNjaWlfaWRlbnRpZmllcnMgLS1mcm9tIG1hcmtkb3duK2F1dG9saW5rX2JhcmVfdXJpcyt0ZXhfbWF0aF9zaW5nbGVfYmFja3NsYXNoIC0tb3V0cHV0IC9Vc2Vycy9xdWFnbGllcmkuYS9XaGl0ZVBhZ2VzL1doaXRlUGFnZXNBcHAvYmFja2VkdXBfZmlsZXMvMjAxNy0xMS0yNi9pbWFnZXMvQW5uYV9RdWFnbGllcmkvc3R1ZGVudF9wcm9maWxlIC0tc3RhbmRhbG9uZSAtLXRlbXBsYXRlIC9Vc2Vycy9xdWFnbGllcmkuYS9MaWJyYXJ5L1IvMy40L2xpYnJhcnkvcm1hcmtkb3duL3JtYXJrZG93bi90ZW1wbGF0ZXMvZ2l0aHViX2RvY3VtZW50L3Jlc291cmNlcy9kZWZhdWx0Lm1kIFxuL0FwcGxpY2F0aW9ucy9SU3R1ZGlvLmFwcC9Db250ZW50cy9NYWNPUy9wYW5kb2MvcGFuZG9jICtSVFMgLUs1MTJtIC1SVFMgL1VzZXJzL3F1YWdsaWVyaS5hL1doaXRlUGFnZXMvV2hpdGVQYWdlc0FwcC9iYWNrZWR1cF9maWxlcy8yMDE3LTExLTI2L2ltYWdlcy9Bbm5hX1F1YWdsaWVyaS9zdHVkZW50X3Byb2ZpbGUgLS10byBodG1sIC0tZnJvbSBtYXJrZG93bl9naXRodWItYXNjaWlfaWRlbnRpZmllcnMgLS1vdXRwdXQgL1VzZXJzL3F1YWdsaWVyaS5hL1doaXRlUGFnZXMvV2hpdGVQYWdlc0FwcC9iYWNrZWR1cF9maWxlcy8yMDE3LTExLTI2L2ltYWdlcy9Bbm5hX1F1YWdsaWVyaS9zdHVkZW50X3Byb2ZpbGUuaHRtbCAtLXN0YW5kYWxvbmUgLS1zZWxmLWNvbnRhaW5lZCAtLWhpZ2hsaWdodC1zdHlsZSBweWdtZW50cyAtLXRlbXBsYXRlIC9Vc2Vycy9xdWFnbGllcmkuYS9MaWJyYXJ5L1IvMy40L2xpYnJhcnkvcm1hcmtkb3duL3JtYXJrZG93bi90ZW1wbGF0ZXMvZ2l0aHViX2RvY3VtZW50L3Jlc291cmNlcy9wcmV2aWV3Lmh0bWwgLS12YXJpYWJsZSAnZ2l0aHViLW1hcmtkb3duLWNzczovVXNlcnMvcXVhZ2xpZXJpLmEvTGlicmFyeS9SLzMuNC9saWJyYXJ5L3JtYXJrZG93bi9ybWFya2Rvd24vdGVtcGxhdGVzL2dpdGh1Yl9kb2N1bWVudC9yZXNvdXJjZXMvZ2l0aHViLmNzcycgLS1lbWFpbC1vYmZ1c2NhdGlvbiBub25lIFxuIn0= -->
-<pre><code>/Applications/RStudio.app/Contents/MacOS/pandoc/pandoc +RTS -K512m -RTS people_page_generator.utf8.md --to markdown_github-ascii_identifiers --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files/2017-11-26/images/Anna_Quaglieri/student_profile --standalone --template /Users/quaglieri.a/Library/R/3.4/library/rmarkdown/rmarkdown/templates/github_document/resources/default.md 
-/Applications/RStudio.app/Contents/MacOS/pandoc/pandoc +RTS -K512m -RTS /Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files/2017-11-26/images/Anna_Quaglieri/student_profile --to html --from markdown_github-ascii_identifiers --output /Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files/2017-11-26/images/Anna_Quaglieri/student_profile.html --standalone --self-contained --highlight-style pygments --template /Users/quaglieri.a/Library/R/3.4/library/rmarkdown/rmarkdown/templates/github_document/resources/preview.html --variable 'github-markdown-css:/Users/quaglieri.a/Library/R/3.4/library/rmarkdown/rmarkdown/templates/github_document/resources/github.css' --email-obfuscation none </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-message-begin eyJkYXRhIjoiXG5QcmV2aWV3IGNyZWF0ZWQ6IC9Vc2Vycy9xdWFnbGllcmkuYS9XaGl0ZVBhZ2VzL1doaXRlUGFnZXNBcHAvYmFja2VkdXBfZmlsZXMvMjAxNy0xMS0yNi9pbWFnZXMvQW5uYV9RdWFnbGllcmkvc3R1ZGVudF9wcm9maWxlLmh0bWxcbiJ9 -->
-<pre><code>
-Preview created: /Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files/2017-11-26/images/Anna_Quaglieri/student_profile.html</code></pre>
-<!-- rnb-message-end -->
-<!-- rnb-message-begin eyJkYXRhIjoiXG5PdXRwdXQgY3JlYXRlZDogMjAxNy0xMS0yNi9pbWFnZXMvQW5uYV9RdWFnbGllcmkvc3R1ZGVudF9wcm9maWxlXG4ifQ== -->
-<pre><code>
-Output created: 2017-11-26/images/Anna_Quaglieri/student_profile</code></pre>
-<!-- rnb-message-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="create-students-profiles-in-the-same-folder-as-the-student-photo" class="section level1">
+<h1><span class="header-section-number">5</span> Create students profiles in the same folder as the student photo</h1>
+<!-- rnb-text-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMgU2F2ZSBkYXRhIiwid3JpdGUuY3N2KHdoaXRlX3BhZ2VzLCBmaWxlLnBhdGgoYmFja3VwX2RpciwgXCJXaGl0ZVBhZ2VzRGF0YS5jc3ZcIiksIHJvdy5uYW1lcyA9IEZBTFNFKSIsIiIsIiMgTW92ZSBkYXRhIHRvIG1haW4gQXBwIGZvbGRlciIsImRpckFwcERhdGEgPC0gXCIvVXNlcnMvcXVhZ2xpZXJpLmEvV2hpdGVQYWdlcy9XaGl0ZVBhZ2VzQXBwL2RhdGFcIiIsImZyb20gPC0gZmlsZS5wYXRoKGZpbGUucGF0aChiYWNrdXBfZGlyLCBcIldoaXRlUGFnZXNEYXRhLmNzdlwiKSkiLCJ0byA8LSBmaWxlLnBhdGgoZGlyQXBwRGF0YSwgXCJXaGl0ZVBhZ2VzRGF0YS5jc3ZcIikiLCJmaWxlLmNvcHkoZnJvbSwgdG8pIl19 -->
+<!-- rnb-source-begin eyJkYXRhIjpbIiMgU2F2ZSBkYXRhIiwid3JpdGUuY3N2KHdoaXRlX3BhZ2VzLCBmaWxlLnBhdGgoZGlyQXBwQmFja3VwRGF0ZSwgXCJXaGl0ZVBhZ2VzRGF0YS5jc3ZcIiksIHJvdy5uYW1lcyA9IEZBTFNFKSIsIiIsIiMgTW92ZSBkYXRhIHRvIG1haW4gQXBwIGZvbGRlciIsImRpckFwcERhdGEgPC0gXCIvVXNlcnMvcXVhZ2xpZXJpLmEvV2hpdGVQYWdlcy9XaGl0ZVBhZ2VzQXBwL2RhdGFcIiIsImZyb20gPC0gZmlsZS5wYXRoKGZpbGUucGF0aChkaXJBcHBCYWNrdXBEYXRlLCBcIldoaXRlUGFnZXNEYXRhLmNzdlwiKSkiLCJ0byA8LSBmaWxlLnBhdGgoZGlyQXBwRGF0YSwgXCJXaGl0ZVBhZ2VzRGF0YS5jc3ZcIikiLCJmaWxlLmNvcHkoZnJvbSwgdG8sIG92ZXJ3cml0ZSA9IFRSVUUpIl19 -->
 <pre class="r"><code># Save data
-write.csv(white_pages, file.path(backup_dir, &quot;WhitePagesData.csv&quot;), row.names = FALSE)
+write.csv(white_pages, file.path(dirAppBackupDate, &quot;WhitePagesData.csv&quot;), row.names = FALSE)
 
 # Move data to main App folder
 dirAppData &lt;- &quot;/Users/quaglieri.a/WhitePages/WhitePagesApp/data&quot;
-from &lt;- file.path(file.path(backup_dir, &quot;WhitePagesData.csv&quot;))
+from &lt;- file.path(file.path(dirAppBackupDate, &quot;WhitePagesData.csv&quot;))
 to &lt;- file.path(dirAppData, &quot;WhitePagesData.csv&quot;)
-file.copy(from, to)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIEZBTFNFXG4ifQ== -->
-<pre><code>[1] FALSE</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMgTW92ZSBwaG90b3MgdG8gbWFpbiBBcHAgZm9sZGVyIiwiZGlyQXBwSW1hZ2VzIDwtIFwiL1VzZXJzL3F1YWdsaWVyaS5hL1doaXRlUGFnZXMvV2hpdGVQYWdlc0FwcC9pbWFnZXNcIiIsImZyb20gPC0gZmlsZS5wYXRoKGZpbGUucGF0aChiYWNrdXBfZGlyLCBcImltYWdlc1wiKSkiLCJ0byA8LSBmaWxlLnBhdGgoZGlyQXBwKSIsImZpbGUuY29weShmcm9tLCB0bywgcmVjdXJzaXZlID0gVFJVRSkiXX0= -->
-<pre class="r"><code># Move photos to main App folder
-dirAppImages &lt;- &quot;/Users/quaglieri.a/WhitePages/WhitePagesApp/images&quot;
-from &lt;- file.path(file.path(backup_dir, &quot;images&quot;))
-to &lt;- file.path(dirApp)
-file.copy(from, to, recursive = TRUE)</code></pre>
+file.copy(from, to, overwrite = TRUE)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
 <pre><code>[1] TRUE</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMgRG8gaXQgaW4gdGhlIHNlcnZlciBDaGFuZ2UgY29sbmFtZXMgY29sbmFtZXMod2hpdGVfcGFnZXMpIDwtIiwiIyBjKCdyZWNvcmRfaWQnLCdyZWRjYXBfc3VydmV5X2lkZW50aWZpZXInLCd3ZWhpX3doaXRlX3BhZ2VzX3RpbWVzdGFtcCcsIiwiIyAnRmlyc3QgbmFtZScsJ0xhc3QgbmFtZScsJ0xhYicsJ0RpdmlzaW9uJywnQ29udGFjdCBlbWFpbCcsJ0FyZWFzIG9mIiwiIyBpbnRlcmVzdCBvciBleHBlcnRpc2UnLCAnTGFiIHNraWxscycsJ0VxdWlwbWVudCBleHBlcmllbmNlJywnU29mdHdhcmUiLCIjIGV4cGVyaWVuY2UnLCdIb2JiaWVzL0ludGVyZXN0cycsJ3dlaGlfd2hpdGVfcGFnZXNfY29tcGxldGUnLCdwaG90b191cGxvYWQnLCd3ZWhpX3doaXRlX3BhZ2VzX2NvbXBsZXRlJywnUGhvdG9OYW1lJykiLCIiLCIjIHdoaXRlX3BhZ2VzIDwtIHdoaXRlX3BhZ2VzWyxjb2xuYW1lcyh3aGl0ZV9wYWdlcylbIShjb2xuYW1lcyh3aGl0ZV9wYWdlcykiLCIjICVpbiUiLCIjIGMoJ3JlY29yZF9pZCcsJ3JlZGNhcF9zdXJ2ZXlfaWRlbnRpZmllcicsJ3dlaGlfd2hpdGVfcGFnZXNfdGltZXN0YW1wJywnd2VoaV93aGl0ZV9wYWdlc19jb21wbGV0ZScpKV1dIl19 -->
-<pre class="r"><code># Do it in the server Change colnames colnames(white_pages) &lt;-
-# c('record_id','redcap_survey_identifier','wehi_white_pages_timestamp',
-# 'First name','Last name','Lab','Division','Contact email','Areas of
-# interest or expertise', 'Lab skills','Equipment experience','Software
-# experience','Hobbies/Interests','wehi_white_pages_complete','photo_upload','wehi_white_pages_complete','PhotoName')
-
-# white_pages &lt;- white_pages[,colnames(white_pages)[!(colnames(white_pages)
-# %in%
-# c('record_id','redcap_survey_identifier','wehi_white_pages_timestamp','wehi_white_pages_complete'))]]</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjpbIiMgTW92ZSBwaG90b3MgdG8gbWFpbiBBcHAgZm9sZGVyIiwiZGlyQXBwSW1hZ2VzIDwtIFwiL1VzZXJzL3F1YWdsaWVyaS5hL1doaXRlUGFnZXMvV2hpdGVQYWdlc0FwcC9pbWFnZXNcIiIsImZyb20gPC0gZmlsZS5wYXRoKGZpbGUucGF0aChkaXJBcHBCYWNrdXBEYXRlLCBcImltYWdlc1wiKSkiLCJ0byA8LSBmaWxlLnBhdGgoZGlyQXBwKSIsImZpbGUuY29weShmcm9tLCB0bywgcmVjdXJzaXZlID0gVFJVRSwgb3ZlcndyaXRlID0gVFJVRSkiXX0= -->
+<pre class="r"><code># Move photos to main App folder
+dirAppImages &lt;- &quot;/Users/quaglieri.a/WhitePages/WhitePagesApp/images&quot;
+from &lt;- file.path(file.path(dirAppBackupDate, &quot;images&quot;))
+to &lt;- file.path(dirApp)
+file.copy(from, to, recursive = TRUE, overwrite = TRUE)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
 <div id="data-stats" class="section level1">
-<h1><span class="header-section-number">4</span> Data Stats</h1>
-<p>In the backedup <strong>White Pages</strong> on the 2017-11-26 there are 6 entries and 18 columns.</p>
+<h1><span class="header-section-number">6</span> Data Stats</h1>
+<p>In the backedup <strong>White Pages</strong> on the 2017-11-26 there are 4 entries and 21 columns.</p>
 <p>The full <strong>White Pages</strong> is printed below.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -511,31 +490,14 @@ file.copy(from, to, recursive = TRUE)</code></pre>
 <th align="left">photo_upload</th>
 <th align="right">wehi_white_pages_complete</th>
 <th align="left">PhotoName</th>
-<th align="left">Name</th>
+<th align="left">NameFolder</th>
+<th align="left">NameDisplay</th>
+<th align="left">dtimes</th>
+<th align="right">thetimes</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">1</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">Si</td>
-<td align="left">Foroughi</td>
-<td align="left">Gibbs</td>
-<td align="left">NA</td>
-<td align="left"><a href="mailto:foroughi@wehi.edu.au">foroughi@wehi.edu.au</a></td>
-<td align="left">Clinical research, biomarker discovery, clinical data capture and management, colorectal cancer, EGFR ligands, IHC</td>
-<td align="left">NA</td>
-<td align="left">Ventana Benchmark Ultra, Ventana iScan HT</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NHL (Go Oilers!), cars (Porche’s!), tennis, travelling, live music</td>
-<td align="left">NA</td>
-<td align="right">2</td>
-<td align="left">NA</td>
-<td align="left">Si Foroughi</td>
-</tr>
-<tr class="even">
 <td align="right">2</td>
 <td align="left">NA</td>
 <td align="left">2017-10-02 15:26:29</td>
@@ -553,9 +515,12 @@ file.copy(from, to, recursive = TRUE)</code></pre>
 <td align="left">NA</td>
 <td align="right">2</td>
 <td align="left">NA</td>
+<td align="left">Caleb_Dawson</td>
 <td align="left">Caleb Dawson</td>
+<td align="left">2017-10-02 15:26:29</td>
+<td align="right">(17-10-02 15:26:29)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">3</td>
 <td align="left">NA</td>
 <td align="left">2017-10-03 11:27:24</td>
@@ -573,9 +538,12 @@ file.copy(from, to, recursive = TRUE)</code></pre>
 <td align="left">NA</td>
 <td align="right">2</td>
 <td align="left">NA</td>
+<td align="left">Nicole_McKenzie</td>
 <td align="left">Nicole McKenzie</td>
+<td align="left">2017-10-03 11:27:24</td>
+<td align="right">(17-10-03 11:27:24)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">4</td>
 <td align="left">NA</td>
 <td align="left">2017-10-03 18:55:13</td>
@@ -593,27 +561,10 @@ file.copy(from, to, recursive = TRUE)</code></pre>
 <td align="left">NA</td>
 <td align="right">2</td>
 <td align="left">NA</td>
+<td align="left">James_Cooney</td>
 <td align="left">James Cooney</td>
-</tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="left">NA</td>
-<td align="left">2017-10-03 19:32:01</td>
-<td align="left">Anna</td>
-<td align="left">Quaglieri</td>
-<td align="left">Speed</td>
-<td align="left">NA</td>
-<td align="left"><a href="mailto:quaglieri.a@wehi.edu.au">quaglieri.a@wehi.edu.au</a></td>
-<td align="left">RNA-Sequencing, Variant calling, ChIp-Seq, Statistics</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">Footy, Gym, Running, Samba, Photography, Coding</td>
-<td align="left">NA</td>
-<td align="right">2</td>
-<td align="left">NA</td>
-<td align="left">Anna Quaglieri</td>
+<td align="left">2017-10-03 18:55:13</td>
+<td align="right">(17-10-03 18:55:13)</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
@@ -632,17 +583,63 @@ file.copy(from, to, recursive = TRUE)</code></pre>
 <td align="left">AFL, Samba, Photography</td>
 <td align="left">[document]</td>
 <td align="right">2</td>
-<td align="left">/Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files/2017-11-25/student_photos/Anna_Quaglieri/6–Screen Shot 2017-11-21 at 3.47.15 pm.png</td>
+<td align="left">/Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files/2017-11-26/images/Anna_Quaglieri/6–Screen Shot 2017-11-21 at 3.47.15 pm.png</td>
+<td align="left">Anna_Quaglieri</td>
 <td align="left">Anna Quaglieri</td>
+<td align="left">2017-11-21 15:48:00</td>
+<td align="right">(17-11-21 15:48:00)</td>
 </tr>
 </tbody>
 </table>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<ul>
+<li>List of people present in the student’s folder</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoibGlzdC5maWxlcyhkaXJBcHBCYWNrdXBJbWFnZXMsIHJlY3Vyc2l2ZSA9IFRSVUUpIn0= -->
+<pre class="r"><code>list.files(dirAppBackupImages, recursive = TRUE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIkFubmFfUXVhZ2xpZXJpLzYtLVNjcmVlbiBTaG90IDIwMTctMTEtMjEgYXQgMy40Ny4xNSBwbS5wbmdcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gWzJdIFwiQW5uYV9RdWFnbGllcmkvc3R1ZGVudF9wcm9maWxlX2ZpbGVzL2ZpZ3VyZS1tYXJrZG93bl9naXRodWIvd2hpdGVfbmFtZSROYW1lRm9sZGVyLTEucG5nXCJcbiBbM10gXCJBbm5hX1F1YWdsaWVyaS9zdHVkZW50X3Byb2ZpbGUuaHRtbFwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIFs0XSBcIkFubmFfUXVhZ2xpZXJpL3N0dWRlbnRfcHJvZmlsZS5tZFwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gWzVdIFwiQ2FsZWJfRGF3c29uL3N0dWRlbnRfcHJvZmlsZS5odG1sXCIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiBbNl0gXCJDYWxlYl9EYXdzb24vc3R1ZGVudF9wcm9maWxlLm1kXCIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIFs3XSBcIkphbWVzX0Nvb25leS9zdHVkZW50X3Byb2ZpbGUuaHRtbFwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gWzhdIFwiSmFtZXNfQ29vbmV5L3N0dWRlbnRfcHJvZmlsZS5tZFwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiBbOV0gXCJOaWNvbGVfTWNLZW56aWUvc3R1ZGVudF9wcm9maWxlLmh0bWxcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuWzEwXSBcIk5pY29sZV9NY0tlbnppZS9zdHVkZW50X3Byb2ZpbGUubWRcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4ifQ== -->
+<pre><code> [1] &quot;Anna_Quaglieri/6--Screen Shot 2017-11-21 at 3.47.15 pm.png&quot;                             
+ [2] &quot;Anna_Quaglieri/student_profile_files/figure-markdown_github/white_name$NameFolder-1.png&quot;
+ [3] &quot;Anna_Quaglieri/student_profile.html&quot;                                                    
+ [4] &quot;Anna_Quaglieri/student_profile.md&quot;                                                      
+ [5] &quot;Caleb_Dawson/student_profile.html&quot;                                                      
+ [6] &quot;Caleb_Dawson/student_profile.md&quot;                                                        
+ [7] &quot;James_Cooney/student_profile.html&quot;                                                      
+ [8] &quot;James_Cooney/student_profile.md&quot;                                                        
+ [9] &quot;Nicole_McKenzie/student_profile.html&quot;                                                   
+[10] &quot;Nicole_McKenzie/student_profile.md&quot;                                                     </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjpbIkFubmFfUXVhZ2xpZXJpLzYtLVNjcmVlbiBTaG90IDIwMTctMTEtMjEgYXQgMy40Ny4xNSBwbS5wbmdcbiIsIkFubmFfUXVhZ2xpZXJpL3N0dWRlbnRfcHJvZmlsZV9maWxlcy9maWd1cmUtbWFya2Rvd25fZ2l0aHViL3doaXRlX25hbWUkTmFtZUZvbGRlci0xLnBuZ1xuIiwiQW5uYV9RdWFnbGllcmkvc3R1ZGVudF9wcm9maWxlLmh0bWxcbiIsIkFubmFfUXVhZ2xpZXJpL3N0dWRlbnRfcHJvZmlsZS5tZFxuIiwiQ2FsZWJfRGF3c29uL3N0dWRlbnRfcHJvZmlsZS5odG1sXG4iLCJDYWxlYl9EYXdzb24vc3R1ZGVudF9wcm9maWxlLm1kXG4iLCJKYW1lc19Db29uZXkvc3R1ZGVudF9wcm9maWxlLmh0bWxcbiIsIkphbWVzX0Nvb25leS9zdHVkZW50X3Byb2ZpbGUubWRcbiIsIk5pY29sZV9NY0tlbnppZS9zdHVkZW50X3Byb2ZpbGUuaHRtbFxuIiwiTmljb2xlX01jS2VuemllL3N0dWRlbnRfcHJvZmlsZS5tZFxuIl19 -->
+<pre><code>Anna_Quaglieri/6--Screen Shot 2017-11-21 at 3.47.15 pm.png
+
+Anna_Quaglieri/student_profile_files/figure-markdown_github/white_name$NameFolder-1.png
+
+Anna_Quaglieri/student_profile.html
+
+Anna_Quaglieri/student_profile.md
+
+Caleb_Dawson/student_profile.html
+
+Caleb_Dawson/student_profile.md
+
+James_Cooney/student_profile.html
+
+James_Cooney/student_profile.md
+
+Nicole_McKenzie/student_profile.html
+
+Nicole_McKenzie/student_profile.md</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRG93bmxvYWQgYW5kIGJhY2t1cCBkYXRhIgphdXRob3I6ICJBbm5hIFF1YWdsaWVyaSIKb3V0cHV0OgogIGh0bWxfbm90ZWJvb2s6CiAgICBudW1iZXJfc2VjdGlvbnM6IHllcwogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDogeWVzCiAgICBmaWdfY2FwdGlvbjogeWVzCi0tLQoKYHIgU3lzLkRhdGUoKWAuCgpgYGB7ciBpbmNsdWRlPUZBTFNFLG1lc3NhZ2U9RkFMU0UsZWNobz1UUlVFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsdGlkeSA9IFRSVUUpCgpsaWJyYXJ5KERUKQpsaWJyYXJ5KHJlYWRyKQpsaWJyYXJ5KHJlZGNhcEFQSSkKbGlicmFyeShyZXNoYXBlMikKbGlicmFyeShrbml0cikKCmRpckFwcCA8LSAiL1VzZXJzL3F1YWdsaWVyaS5hL1doaXRlUGFnZXMvV2hpdGVQYWdlc0FwcCIKYGBgCgojIERvd2xvYWQgZnJvbSBBUEkKCmBgYHtyIGRvd25sb2FkX2RhdGF9CmFwaV90b2tlbiA8LSAnOTkzOEQ3RTdCOUIyRDg2MUVFN0UxRjRGRkI2NDYzN0EnCnJjb24gPC0gcmVkY2FwQ29ubmVjdGlvbih1cmw9Imh0dHBzOi8vcmVkY2FwLndlaGkuZWR1LmF1L2FwaS8iLCB0b2tlbj1hcGlfdG9rZW4pCndoaXRlX3BhZ2VzIDwtIGV4cG9ydFJlY29yZHMocmNvbikKd2hpdGVfcGFnZXMkUGhvdG9OYW1lIDwtIE5BCmBgYAoKIyBDbGVhbiB0ZXh0IGRhdGEKClRyeSB0byBta2FlIGV2ZXJ5IHRleHQgY29sdW1uIGFzIGEgbGlzdCBvZiBpdGVtIHNlcGFyYXRlZCBieSBhIGNvbW1hLgoKYGBge3IgY2xlYW5fZGF0YX0KIyBhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlcgp3aGl0ZV9wYWdlcyRhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlciA8LSBnc3ViKCJcbiIsIiwiLHdoaXRlX3BhZ2VzJGFyZWFzX29mX2ludGVyZXN0X29yX2V4cGVyKQp3aGl0ZV9wYWdlcyRhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlciA8LSBnc3ViKCIgLCIsIiwiLHdoaXRlX3BhZ2VzJGFyZWFzX29mX2ludGVyZXN0X29yX2V4cGVyKQp3aGl0ZV9wYWdlcyRhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlciA8LSBnc3ViKCIsIiwiLCAiLHdoaXRlX3BhZ2VzJGFyZWFzX29mX2ludGVyZXN0X29yX2V4cGVyKQp3aGl0ZV9wYWdlcyRhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlciA8LSBnc3ViKCIgICIsIiAiLHdoaXRlX3BhZ2VzJGFyZWFzX29mX2ludGVyZXN0X29yX2V4cGVyKQp3aGl0ZV9wYWdlcyRhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlciA8LSBnc3ViKCIsICwiLCIsIix3aGl0ZV9wYWdlcyRhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlcikKCiMgZXF1aXBtZW50X2V4cGVyaWVuY2UKd2hpdGVfcGFnZXMkZXF1aXBtZW50X2V4cGVyaWVuY2UgPC0gZ3N1YigiXG4iLCIsIix3aGl0ZV9wYWdlcyRlcXVpcG1lbnRfZXhwZXJpZW5jZSkKd2hpdGVfcGFnZXMkZXF1aXBtZW50X2V4cGVyaWVuY2UgPC0gZ3N1YigiICwiLCIsIix3aGl0ZV9wYWdlcyRlcXVpcG1lbnRfZXhwZXJpZW5jZSkKd2hpdGVfcGFnZXMkZXF1aXBtZW50X2V4cGVyaWVuY2UgPC0gZ3N1YigiLCIsIiwgIix3aGl0ZV9wYWdlcyRlcXVpcG1lbnRfZXhwZXJpZW5jZSkKd2hpdGVfcGFnZXMkZXF1aXBtZW50X2V4cGVyaWVuY2UgPC0gZ3N1YigiICAiLCIgIix3aGl0ZV9wYWdlcyRlcXVpcG1lbnRfZXhwZXJpZW5jZSkKd2hpdGVfcGFnZXMkZXF1aXBtZW50X2V4cGVyaWVuY2UgPC0gZ3N1YigiLCAsIiwiLCIsd2hpdGVfcGFnZXMkZXF1aXBtZW50X2V4cGVyaWVuY2UpCgojIGxhYiBza2lsbHMKd2hpdGVfcGFnZXMkbGFiX3NraWxscyA8LSBnc3ViKCJcbiIsIiwiLHdoaXRlX3BhZ2VzJGxhYl9za2lsbHMpCndoaXRlX3BhZ2VzJGxhYl9za2lsbHMgPC0gZ3N1YigiICwiLCIsIix3aGl0ZV9wYWdlcyRsYWJfc2tpbGxzKQp3aGl0ZV9wYWdlcyRsYWJfc2tpbGxzIDwtIGdzdWIoIiwiLCIsICIsd2hpdGVfcGFnZXMkbGFiX3NraWxscykKd2hpdGVfcGFnZXMkbGFiX3NraWxscyA8LSBnc3ViKCIgICIsIiAiLHdoaXRlX3BhZ2VzJGxhYl9za2lsbHMpCndoaXRlX3BhZ2VzJGxhYl9za2lsbHMgPC0gZ3N1YigiLCAsIiwiLCIsd2hpdGVfcGFnZXMkbGFiX3NraWxscykKCiMgSG9iYnkgaW50ZXJlc3QKd2hpdGVfcGFnZXMkaG9iYmllc19pbnRlcmVzdHMgPC0gZ3N1YigiXG4iLCIsIix3aGl0ZV9wYWdlcyRob2JiaWVzX2ludGVyZXN0cykKd2hpdGVfcGFnZXMkaG9iYmllc19pbnRlcmVzdHMgPC0gZ3N1YigiICwiLCIsIix3aGl0ZV9wYWdlcyRob2JiaWVzX2ludGVyZXN0cykKd2hpdGVfcGFnZXMkaG9iYmllc19pbnRlcmVzdHMgPC0gZ3N1YigiLCIsIiwgIix3aGl0ZV9wYWdlcyRob2JiaWVzX2ludGVyZXN0cykKd2hpdGVfcGFnZXMkaG9iYmllc19pbnRlcmVzdHMgPC0gZ3N1YigiICAiLCIgIix3aGl0ZV9wYWdlcyRob2JiaWVzX2ludGVyZXN0cykKd2hpdGVfcGFnZXMkaG9iYmllc19pbnRlcmVzdHMgPC0gZ3N1YigiLCAsIiwiLCIsd2hpdGVfcGFnZXMkaG9iYmllc19pbnRlcmVzdHMpCgojIHNvZnR3YXJlX2V4cGVyaWVuY2UKd2hpdGVfcGFnZXMkc29mdHdhcmVfZXhwZXJpZW5jZSA8LSBnc3ViKCJcbiIsIiwiLHdoaXRlX3BhZ2VzJHNvZnR3YXJlX2V4cGVyaWVuY2UpCndoaXRlX3BhZ2VzJHNvZnR3YXJlX2V4cGVyaWVuY2UgPC0gZ3N1YigiICwiLCIsIix3aGl0ZV9wYWdlcyRzb2Z0d2FyZV9leHBlcmllbmNlKQp3aGl0ZV9wYWdlcyRzb2Z0d2FyZV9leHBlcmllbmNlIDwtIGdzdWIoIiwiLCIsICIsd2hpdGVfcGFnZXMkc29mdHdhcmVfZXhwZXJpZW5jZSkKd2hpdGVfcGFnZXMkc29mdHdhcmVfZXhwZXJpZW5jZSA8LSBnc3ViKCIgICIsIiAiLHdoaXRlX3BhZ2VzJHNvZnR3YXJlX2V4cGVyaWVuY2UpCndoaXRlX3BhZ2VzJHNvZnR3YXJlX2V4cGVyaWVuY2UgPC0gZ3N1YigiLCAsIiwiLCIsd2hpdGVfcGFnZXMkc29mdHdhcmVfZXhwZXJpZW5jZSkKYGBgCgojIEV4cG9ydCBzdHVkZW50cyBwaG90b3MKIApgYGB7ciBleHBvcnRfcGhvdG99CmZpbGVzVG9FeHBvcnQgPC0gbWVsdCh3aGl0ZV9wYWdlc1ssIGMoInJlY29yZF9pZCIsICJmaXJzdF9uYW1lIiwibGFzdF9uYW1lIiwicGhvdG9fdXBsb2FkIildLCBjKCJyZWNvcmRfaWQiLCJmaXJzdF9uYW1lIiwibGFzdF9uYW1lIiksbmEucm09VFJVRSkKCiMgY3JlYXRlIGJhY2t1cCBmb2xkZXIgd2l0aCBhIHNwZWNpZmljIGRhdGUKZGF0ZSA8LSBTeXMuRGF0ZSgpCmJhY2t1cF9kaXIgPC0gZmlsZS5wYXRoKGRpckFwcCwiYmFja2VkdXBfZmlsZXMiLGRhdGUpCmRpci5jcmVhdGUoYmFja3VwX2RpcixzaG93V2FybmluZ3MgPSBGQUxTRSxyZWN1cnNpdmUgPSBUUlVFKQoKIyBTdHVkZW50cycgcGhvdG9zIGRpcmVjdG9yeQppbWFnZXNEaXIgPC0gZmlsZS5wYXRoKGJhY2t1cF9kaXIsImltYWdlcyIpCmRpci5jcmVhdGUoaW1hZ2VzRGlyLHNob3dXYXJuaW5ncyA9IEZBTFNFLHJlY3Vyc2l2ZSA9IFRSVUUpCgpmb3IoaSBpbiAxOm5yb3coZmlsZXNUb0V4cG9ydCkpewogIAogIG5hbWVfc3VybmFtZSA8LSBwYXN0ZShmaWxlc1RvRXhwb3J0JGZpcnN0X25hbWVbaV0sZmlsZXNUb0V4cG9ydCRsYXN0X25hbWVbaV0sc2VwPSJfIikKCiAgIyBjcmVhdGUgYSBzaW5nbGUgZGlyZWN0b3J5IGZvciBldmVyeSBzdHVkZW50CiAgZGlyLmNyZWF0ZShmaWxlLnBhdGgoaW1hZ2VzRGlyLG5hbWVfc3VybmFtZSksc2hvd1dhcm5pbmdzID0gRkFMU0UscmVjdXJzaXZlID0gVFJVRSkKCiAgZXhwb3J0RmlsZXMocmNvbiwgIAogICAgICAgICAgICAgIHJlY29yZD1hcy5udW1lcmljKGZpbGVzVG9FeHBvcnQkcmVjb3JkX2lkW2ldKSwKICAgICAgICAgICAgICBmaWVsZD1hcy5jaGFyYWN0ZXIoZmlsZXNUb0V4cG9ydCR2YXJpYWJsZVtpXSksCiAgICAgICAgICAgICAgZGlyID0gZmlsZS5wYXRoKGltYWdlc0RpcixuYW1lX3N1cm5hbWUpKQogIAogIFBob3RvTmFtZSA8LSBsaXN0LmZpbGVzKGZpbGUucGF0aChpbWFnZXNEaXIsbmFtZV9zdXJuYW1lKSxmdWxsLm5hbWVzID0gVFJVRSkKICB3aGl0ZV9wYWdlcyRQaG90b05hbWVbd2hpdGVfcGFnZXMkcmVjb3JkX2lkID09IGZpbGVzVG9FeHBvcnQkcmVjb3JkX2lkW2ldXSA8LSBhcy5jaGFyYWN0ZXIoUGhvdG9OYW1lKQogIAogICMgQ3JlYXRlIFN0dWRlbnQgcHJvZmlsZSB3aXRoIHBlb3BsZSdzIHBhZ2UgZ2VuZXJhdG9yCiAgcm1hcmtkb3duOjpyZW5kZXIoaW5wdXQ9ZmlsZS5wYXRoKGRpckFwcCwicGVvcGxlX3BhZ2VfZ2VuZXJhdG9yLlJtZCIpLAogICAgICAgICAgb3V0cHV0X2ZpbGUgID0gZmlsZS5wYXRoKGltYWdlc0RpcixuYW1lX3N1cm5hbWUsInN0dWRlbnRfcHJvZmlsZSIpLAogICAgICAgICAgcGFyYW1zID0gbGlzdChuYW1lID0gZ3N1YigiXyIsIiAiLG5hbWVfc3VybmFtZSkpKQogICMgQ3JlYXRlIFN0dWRlbnQgcHJvZmlsZSB3aXRoIHBlb3BsZSdzIHBhZ2UgZ2VuZXJhdG9yCiAgI3JtYXJrZG93bjo6cmVuZGVyKGlucHV0PWZpbGUucGF0aChkaXJBcHAsInBlb3BsZV9wYWdlX2dlbmVyYXRvci5SbWQiKSwKICAgIyAgICAgICBvdXRwdXRfZmlsZSAgPSBmaWxlLnBhdGgoaW1hZ2VzRGlyLG5hbWVfc3VybmFtZSwic3R1ZGVudF9wcm9maWxlLm1kIiksCiAgICAjICAgICAgcGFyYW1zID0gbGlzdChuYW1lID0gZ3N1YigiXyIsIiAiLG5hbWVfc3VybmFtZSkpKQp9CmBgYAoKCmBgYHtyIHNhdmVfYW5kX2NvcHlfdG9fbWFpbn0KIyBTYXZlIGRhdGEKd3JpdGUuY3N2KHdoaXRlX3BhZ2VzLGZpbGUucGF0aChiYWNrdXBfZGlyLCJXaGl0ZVBhZ2VzRGF0YS5jc3YiKSxyb3cubmFtZXMgPSBGQUxTRSkKCiMgTW92ZSBkYXRhIHRvIG1haW4gQXBwIGZvbGRlcgpkaXJBcHBEYXRhIDwtICIvVXNlcnMvcXVhZ2xpZXJpLmEvV2hpdGVQYWdlcy9XaGl0ZVBhZ2VzQXBwL2RhdGEiCmZyb20gPC0gZmlsZS5wYXRoKGZpbGUucGF0aChiYWNrdXBfZGlyLCJXaGl0ZVBhZ2VzRGF0YS5jc3YiKSkKdG8gPC0gZmlsZS5wYXRoKGRpckFwcERhdGEsIldoaXRlUGFnZXNEYXRhLmNzdiIpCmZpbGUuY29weShmcm9tLHRvKQoKIyBNb3ZlIHBob3RvcyB0byBtYWluIEFwcCBmb2xkZXIKZGlyQXBwSW1hZ2VzIDwtICAiL1VzZXJzL3F1YWdsaWVyaS5hL1doaXRlUGFnZXMvV2hpdGVQYWdlc0FwcC9pbWFnZXMiCmZyb20gPC0gZmlsZS5wYXRoKGZpbGUucGF0aChiYWNrdXBfZGlyLCJpbWFnZXMiKSkKdG8gPC0gZmlsZS5wYXRoKGRpckFwcCkKZmlsZS5jb3B5KGZyb20sdG8scmVjdXJzaXZlID0gVFJVRSkKCiMgRG8gaXQgaW4gdGhlIHNlcnZlcgojIENoYW5nZSBjb2xuYW1lcwojY29sbmFtZXMod2hpdGVfcGFnZXMpIDwtIGMoInJlY29yZF9pZCIsInJlZGNhcF9zdXJ2ZXlfaWRlbnRpZmllciIsIndlaGlfd2hpdGVfcGFnZXNfdGltZXN0YW1wIiwKIyAgICAgICAgICAgICAgICAgICAgICAgICAgICJGaXJzdCBuYW1lIiwiTGFzdCBuYW1lIiwiTGFiIiwiRGl2aXNpb24iLCJDb250YWN0IGVtYWlsIiwiQXJlYXMgb2YgaW50ZXJlc3Qgb3IgZXhwZXJ0aXNlIiwKIyAgICAgICAgICAgICAgICAgICAgICAgICAgICJMYWIgc2tpbGxzIiwiRXF1aXBtZW50IGV4cGVyaWVuY2UiLCJTb2Z0d2FyZSBleHBlcmllbmNlIiwiSG9iYmllcy9JbnRlcmVzdHMiLCJ3ZWhpX3doaXRlX3BhZ2VzX2NvbXBsZXRlIiwicGhvdG9fdXBsb2FkIiwid2VoaV93aGl0ZV9wYWdlc19jb21wbGV0ZSIsIlBob3RvTmFtZSIpCgojd2hpdGVfcGFnZXMgPC0gd2hpdGVfcGFnZXNbLGNvbG5hbWVzKHdoaXRlX3BhZ2VzKVshKGNvbG5hbWVzKHdoaXRlX3BhZ2VzKSAlaW4lCiNjKCJyZWNvcmRfaWQiLCJyZWRjYXBfc3VydmV5X2lkZW50aWZpZXIiLCJ3ZWhpX3doaXRlX3BhZ2VzX3RpbWVzdGFtcCIsIndlaGlfd2hpdGVfcGFnZXNfY29tcGxldGUiKSldXQoKYGBgCgojIERhdGEgU3RhdHMKCkluIHRoZSBiYWNrZWR1cCAqKldoaXRlIFBhZ2VzKiogb24gdGhlIGByIFN5cy5EYXRlKClgIHRoZXJlIGFyZSBgciBucm93KHdoaXRlX3BhZ2VzKWAgZW50cmllcyBhbmQgYHIgbmNvbCh3aGl0ZV9wYWdlcylgIGNvbHVtbnMuCgpUaGUgZnVsbCAqKldoaXRlIFBhZ2VzKiogaXMgcHJpbnRlZCBiZWxvdy4KCmBgYHtyfQprYWJsZSh3aGl0ZV9wYWdlcykKYGBgCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRG93bmxvYWQgYW5kIGJhY2t1cCBkYXRhIgphdXRob3I6ICJBbm5hIFF1YWdsaWVyaSIKb3V0cHV0OgogIGh0bWxfbm90ZWJvb2s6CiAgICBudW1iZXJfc2VjdGlvbnM6IHllcwogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDogeWVzCiAgICBmaWdfY2FwdGlvbjogeWVzCi0tLQoKYHIgU3lzLkRhdGUoKWAuCgpgYGB7ciBpbmNsdWRlPUZBTFNFLG1lc3NhZ2U9RkFMU0UsZWNobz1UUlVFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsdGlkeSA9IFRSVUUpCgpsaWJyYXJ5KERUKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShyZWRjYXBBUEkpCmxpYnJhcnkocmVzaGFwZTIpCmxpYnJhcnkoa25pdHIpCmxpYnJhcnkoY2hyb24pCgojIERpcmVjdG9yaWVzCiMgRGlyIG9mIHRoZSBBcHAKZGlyQXBwIDwtICIvVXNlcnMvcXVhZ2xpZXJpLmEvV2hpdGVQYWdlcy9XaGl0ZVBhZ2VzQXBwIgpkaXJSZnVuY3Rpb25zIDwtICIvVXNlcnMvcXVhZ2xpZXJpLmEvV2hpdGVQYWdlcy9XaGl0ZVBhZ2VzQXBwL1JmdW5jdGlvbiIKCiMgY3JlYXRlIGJhY2t1cCBmb2xkZXIgd2l0aCBhIHNwZWNpZmljIGRhdGUKZGF0ZSA8LSBTeXMuRGF0ZSgpCmRpckFwcEJhY2t1cCA8LSAgIi9Vc2Vycy9xdWFnbGllcmkuYS9XaGl0ZVBhZ2VzL1doaXRlUGFnZXNBcHAvYmFja2VkdXBfZmlsZXMiCmRpckFwcEJhY2t1cERhdGUgPC0gZmlsZS5wYXRoKGRpckFwcCwiYmFja2VkdXBfZmlsZXMiLGRhdGUpCmRpci5jcmVhdGUoZGlyQXBwQmFja3VwRGF0ZSxzaG93V2FybmluZ3MgPSBGQUxTRSxyZWN1cnNpdmUgPSBUUlVFKQoKIyBTdHVkZW50cycgcGhvdG9zIGRpcmVjdG9yeQpkaXJBcHBCYWNrdXBJbWFnZXMgPC0gZmlsZS5wYXRoKGRpckFwcEJhY2t1cERhdGUsImltYWdlcyIpCmRpci5jcmVhdGUoZGlyQXBwQmFja3VwSW1hZ2VzLHNob3dXYXJuaW5ncyA9IEZBTFNFLHJlY3Vyc2l2ZSA9IFRSVUUpCmBgYAoKIyBEb3dsb2FkIGZyb20gQVBJCgpgYGB7ciBkb3dubG9hZF9kYXRhfQphcGlfdG9rZW4gPC0gJzk5MzhEN0U3QjlCMkQ4NjFFRTdFMUY0RkZCNjQ2MzdBJwpyY29uIDwtIHJlZGNhcENvbm5lY3Rpb24odXJsPSJodHRwczovL3JlZGNhcC53ZWhpLmVkdS5hdS9hcGkvIiwgdG9rZW49YXBpX3Rva2VuKQp3aGl0ZV9wYWdlcyA8LSBleHBvcnRSZWNvcmRzKHJjb24pCndoaXRlX3BhZ2VzJFBob3RvTmFtZSA8LSBOQQpgYGAKCiMgQ2xlYW4gdGV4dCBkYXRhCgpUcnkgdG8gbWthZSBldmVyeSB0ZXh0IGNvbHVtbiBhcyBhIGxpc3Qgb2YgaXRlbSBzZXBhcmF0ZWQgYnkgYSBjb21tYS4KCmBgYHtyIGNsZWFuX2RhdGF9CiMgYXJlYXNfb2ZfaW50ZXJlc3Rfb3JfZXhwZXIKd2hpdGVfcGFnZXMkYXJlYXNfb2ZfaW50ZXJlc3Rfb3JfZXhwZXIgPC0gZ3N1YigiXG4iLCIsIix3aGl0ZV9wYWdlcyRhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlcikKd2hpdGVfcGFnZXMkYXJlYXNfb2ZfaW50ZXJlc3Rfb3JfZXhwZXIgPC0gZ3N1YigiICwiLCIsIix3aGl0ZV9wYWdlcyRhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlcikKd2hpdGVfcGFnZXMkYXJlYXNfb2ZfaW50ZXJlc3Rfb3JfZXhwZXIgPC0gZ3N1YigiLCIsIiwgIix3aGl0ZV9wYWdlcyRhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlcikKd2hpdGVfcGFnZXMkYXJlYXNfb2ZfaW50ZXJlc3Rfb3JfZXhwZXIgPC0gZ3N1YigiICAiLCIgIix3aGl0ZV9wYWdlcyRhcmVhc19vZl9pbnRlcmVzdF9vcl9leHBlcikKd2hpdGVfcGFnZXMkYXJlYXNfb2ZfaW50ZXJlc3Rfb3JfZXhwZXIgPC0gZ3N1YigiLCAsIiwiLCIsd2hpdGVfcGFnZXMkYXJlYXNfb2ZfaW50ZXJlc3Rfb3JfZXhwZXIpCgojIGVxdWlwbWVudF9leHBlcmllbmNlCndoaXRlX3BhZ2VzJGVxdWlwbWVudF9leHBlcmllbmNlIDwtIGdzdWIoIlxuIiwiLCIsd2hpdGVfcGFnZXMkZXF1aXBtZW50X2V4cGVyaWVuY2UpCndoaXRlX3BhZ2VzJGVxdWlwbWVudF9leHBlcmllbmNlIDwtIGdzdWIoIiAsIiwiLCIsd2hpdGVfcGFnZXMkZXF1aXBtZW50X2V4cGVyaWVuY2UpCndoaXRlX3BhZ2VzJGVxdWlwbWVudF9leHBlcmllbmNlIDwtIGdzdWIoIiwiLCIsICIsd2hpdGVfcGFnZXMkZXF1aXBtZW50X2V4cGVyaWVuY2UpCndoaXRlX3BhZ2VzJGVxdWlwbWVudF9leHBlcmllbmNlIDwtIGdzdWIoIiAgIiwiICIsd2hpdGVfcGFnZXMkZXF1aXBtZW50X2V4cGVyaWVuY2UpCndoaXRlX3BhZ2VzJGVxdWlwbWVudF9leHBlcmllbmNlIDwtIGdzdWIoIiwgLCIsIiwiLHdoaXRlX3BhZ2VzJGVxdWlwbWVudF9leHBlcmllbmNlKQoKIyBsYWIgc2tpbGxzCndoaXRlX3BhZ2VzJGxhYl9za2lsbHMgPC0gZ3N1YigiXG4iLCIsIix3aGl0ZV9wYWdlcyRsYWJfc2tpbGxzKQp3aGl0ZV9wYWdlcyRsYWJfc2tpbGxzIDwtIGdzdWIoIiAsIiwiLCIsd2hpdGVfcGFnZXMkbGFiX3NraWxscykKd2hpdGVfcGFnZXMkbGFiX3NraWxscyA8LSBnc3ViKCIsIiwiLCAiLHdoaXRlX3BhZ2VzJGxhYl9za2lsbHMpCndoaXRlX3BhZ2VzJGxhYl9za2lsbHMgPC0gZ3N1YigiICAiLCIgIix3aGl0ZV9wYWdlcyRsYWJfc2tpbGxzKQp3aGl0ZV9wYWdlcyRsYWJfc2tpbGxzIDwtIGdzdWIoIiwgLCIsIiwiLHdoaXRlX3BhZ2VzJGxhYl9za2lsbHMpCgojIEhvYmJ5IGludGVyZXN0CndoaXRlX3BhZ2VzJGhvYmJpZXNfaW50ZXJlc3RzIDwtIGdzdWIoIlxuIiwiLCIsd2hpdGVfcGFnZXMkaG9iYmllc19pbnRlcmVzdHMpCndoaXRlX3BhZ2VzJGhvYmJpZXNfaW50ZXJlc3RzIDwtIGdzdWIoIiAsIiwiLCIsd2hpdGVfcGFnZXMkaG9iYmllc19pbnRlcmVzdHMpCndoaXRlX3BhZ2VzJGhvYmJpZXNfaW50ZXJlc3RzIDwtIGdzdWIoIiwiLCIsICIsd2hpdGVfcGFnZXMkaG9iYmllc19pbnRlcmVzdHMpCndoaXRlX3BhZ2VzJGhvYmJpZXNfaW50ZXJlc3RzIDwtIGdzdWIoIiAgIiwiICIsd2hpdGVfcGFnZXMkaG9iYmllc19pbnRlcmVzdHMpCndoaXRlX3BhZ2VzJGhvYmJpZXNfaW50ZXJlc3RzIDwtIGdzdWIoIiwgLCIsIiwiLHdoaXRlX3BhZ2VzJGhvYmJpZXNfaW50ZXJlc3RzKQoKIyBzb2Z0d2FyZV9leHBlcmllbmNlCndoaXRlX3BhZ2VzJHNvZnR3YXJlX2V4cGVyaWVuY2UgPC0gZ3N1YigiXG4iLCIsIix3aGl0ZV9wYWdlcyRzb2Z0d2FyZV9leHBlcmllbmNlKQp3aGl0ZV9wYWdlcyRzb2Z0d2FyZV9leHBlcmllbmNlIDwtIGdzdWIoIiAsIiwiLCIsd2hpdGVfcGFnZXMkc29mdHdhcmVfZXhwZXJpZW5jZSkKd2hpdGVfcGFnZXMkc29mdHdhcmVfZXhwZXJpZW5jZSA8LSBnc3ViKCIsIiwiLCAiLHdoaXRlX3BhZ2VzJHNvZnR3YXJlX2V4cGVyaWVuY2UpCndoaXRlX3BhZ2VzJHNvZnR3YXJlX2V4cGVyaWVuY2UgPC0gZ3N1YigiICAiLCIgIix3aGl0ZV9wYWdlcyRzb2Z0d2FyZV9leHBlcmllbmNlKQp3aGl0ZV9wYWdlcyRzb2Z0d2FyZV9leHBlcmllbmNlIDwtIGdzdWIoIiwgLCIsIiwiLHdoaXRlX3BhZ2VzJHNvZnR3YXJlX2V4cGVyaWVuY2UpCmBgYAoKIyBSZW1vdmUgZHVwbGljYXRlZCBlbnRyaWVzIGZvciBzdHVkZW50cwoKYGBge3J9CiMgTmFtZSBmb3IgZm9sZGVyIHdpdGggXyBiZXR3ZWVuIE5hbWUgYW5kIFN1cm5hbWUKIyBOYW1lIGZvciBkaXNwbGF5CndoaXRlX3BhZ2VzJE5hbWVGb2xkZXIgPC0gcGFzdGUod2hpdGVfcGFnZXMkZmlyc3RfbmFtZSx3aGl0ZV9wYWdlcyRsYXN0X25hbWUsc2VwPSJfIikKd2hpdGVfcGFnZXMkTmFtZURpc3BsYXkgPC0gcGFzdGUod2hpdGVfcGFnZXMkZmlyc3RfbmFtZSx3aGl0ZV9wYWdlcyRsYXN0X25hbWUpCgojIENvbnZlcnQgd2VoaV93aGl0ZV9wYWdlc190aW1lc3RhbXAgaW50byBkYXRlIGFuZCB0aW1lCndoaXRlX3BhZ2VzJGR0aW1lcyA8LSB3aGl0ZV9wYWdlcyR3ZWhpX3doaXRlX3BhZ2VzX3RpbWVzdGFtcApkdHBhcnRzID0gdChhcy5kYXRhLmZyYW1lKHN0cnNwbGl0KGFzLmNoYXJhY3Rlcih3aGl0ZV9wYWdlcyRkdGltZXMpLCcgJykpKQpyb3cubmFtZXMoZHRwYXJ0cykgPSBOVUxMCnRoZXRpbWVzID0gY2hyb24oZGF0ZXM9ZHRwYXJ0c1ssMV0sdGltZXM9ZHRwYXJ0c1ssMl0sCiAgICAgICAgICAgICAgICAgIGZvcm1hdD1jKCd5LW0tZCcsJ2g6bTpzJykpCndoaXRlX3BhZ2VzJHRoZXRpbWVzIDwtIHRoZXRpbWVzCmBgYAoKIyMgRW50cmllZCB3aXRoIHRpbWVzdGFtcCBOQSBhcmUgcmVtb3ZlZAoKYGBge3J9CndoaXRlX3BhZ2VzW2lzLm5hKHdoaXRlX3BhZ2VzJHdlaGlfd2hpdGVfcGFnZXNfdGltZXN0YW1wKSxdCmBgYAoKLSBLZWVwIG9ubHkgb25lIHJlY29yZCBmb3Igc3R1ZGVudCAodGhlIGxhdGVzdCBvbmUpCgpgYGB7cn0Kd2hpdGVfcGFnZXNfb25lbnRyeSA8LSB3aGl0ZV9wYWdlcyAlPiUgZHBseXI6Omdyb3VwX2J5KE5hbWVGb2xkZXIpICU+JQogIGZpbHRlcih0aGV0aW1lcyA9PSBtYXgodGhldGltZXMpKQp3aGl0ZV9wYWdlcyA8LSB3aGl0ZV9wYWdlc19vbmVudHJ5Cgp0YWJsZSh3aGl0ZV9wYWdlcyROYW1lRGlzcGxheSkKdGFibGUod2hpdGVfcGFnZXMkTmFtZURpc3BsYXkpW3RhYmxlKHdoaXRlX3BhZ2VzJE5hbWVEaXNwbGF5KSA+MV0KYGBgCgojIEV4cG9ydCBzdHVkZW50cyBwaG90b3MKIApgYGB7ciBleHBvcnRfcGhvdG99CmZpbGVzVG9FeHBvcnQgPC0gbWVsdCh3aGl0ZV9wYWdlc1ssIGMoInJlY29yZF9pZCIsICJmaXJzdF9uYW1lIiwibGFzdF9uYW1lIiwicGhvdG9fdXBsb2FkIildLCBjKCJyZWNvcmRfaWQiLCJmaXJzdF9uYW1lIiwibGFzdF9uYW1lIiksbmEucm09VFJVRSkKCmZvcihpIGluIDE6bnJvdyhmaWxlc1RvRXhwb3J0KSl7CiAgCiAgbmFtZV9zdXJuYW1lIDwtIHBhc3RlKGZpbGVzVG9FeHBvcnQkZmlyc3RfbmFtZVtpXSxmaWxlc1RvRXhwb3J0JGxhc3RfbmFtZVtpXSxzZXA9Il8iKQoKICAjIGNyZWF0ZSBhIHNpbmdsZSBkaXJlY3RvcnkgZm9yIGV2ZXJ5IHN0dWRlbnQKICBkaXIuY3JlYXRlKGZpbGUucGF0aChkaXJBcHBCYWNrdXBJbWFnZXMsbmFtZV9zdXJuYW1lKSwKICAgICAgICAgICAgIHNob3dXYXJuaW5ncyA9IEZBTFNFLHJlY3Vyc2l2ZSA9IFRSVUUpCgogIGV4cG9ydEZpbGVzKHJjb24sICAKICAgICAgICAgICAgICByZWNvcmQ9YXMubnVtZXJpYyhmaWxlc1RvRXhwb3J0JHJlY29yZF9pZFtpXSksCiAgICAgICAgICAgICAgZmllbGQ9YXMuY2hhcmFjdGVyKGZpbGVzVG9FeHBvcnQkdmFyaWFibGVbaV0pLAogICAgICAgICAgICAgIGRpciA9IGZpbGUucGF0aChkaXJBcHBCYWNrdXBJbWFnZXMsbmFtZV9zdXJuYW1lKSkKICAKICBQaG90b05hbWUgPC0gbGlzdC5maWxlcyhmaWxlLnBhdGgoZGlyQXBwQmFja3VwSW1hZ2VzLG5hbWVfc3VybmFtZSksZnVsbC5uYW1lcyA9IFRSVUUpCiAgd2hpdGVfcGFnZXMkUGhvdG9OYW1lW3doaXRlX3BhZ2VzJHJlY29yZF9pZCA9PSBmaWxlc1RvRXhwb3J0JHJlY29yZF9pZFtpXV0gPC0gYXMuY2hhcmFjdGVyKFBob3RvTmFtZSkKfQpgYGAKCiMgQ3JlYXRlIHN0dWRlbnRzIHByb2ZpbGVzIGluIHRoZSBzYW1lIGZvbGRlciBhcyB0aGUgc3R1ZGVudCBwaG90bwoKYGBge3IgaW5jbHVkZT1GQUxTRX0KZm9yKGkgaW4gMTpucm93KHdoaXRlX3BhZ2VzKSl7CgogIG5hbWVfc3VybmFtZSA8LSBhcy5jaGFyYWN0ZXIod2hpdGVfcGFnZXMkTmFtZUZvbGRlcltpXSkKICBwcmludChuYW1lX3N1cm5hbWUpCiAgZGlyLmNyZWF0ZShmaWxlLnBhdGgoZGlyQXBwQmFja3VwSW1hZ2VzLG5hbWVfc3VybmFtZSksCiAgICAgICAgICAgICByZWN1cnNpdmUgPSBUUlVFLHNob3dXYXJuaW5ncyA9IEZBTFNFKQogIAogICMgQ3JlYXRlIFN0dWRlbnQgcHJvZmlsZSB3aXRoIHBlb3BsZSdzIHBhZ2UgZ2VuZXJhdG9yCiAgcm1hcmtkb3duOjpyZW5kZXIoaW5wdXQ9ZmlsZS5wYXRoKGRpclJmdW5jdGlvbnMsInBlb3BsZV9wYWdlX2dlbmVyYXRvci5SbWQiKSwKICAgICAgICAgIG91dHB1dF9maWxlICA9IGZpbGUucGF0aChkaXJBcHBCYWNrdXBJbWFnZXMsbmFtZV9zdXJuYW1lLCJzdHVkZW50X3Byb2ZpbGUubWQiKSwKICAgICAgICAgIHBhcmFtcyA9IGxpc3Qod2hpdGVfbmFtZSA9IHdoaXRlX3BhZ2VzW3doaXRlX3BhZ2VzJE5hbWVGb2xkZXIgJWluJSBuYW1lX3N1cm5hbWUsXSkpCn0KYGBgCgoKYGBge3Igc2F2ZV9hbmRfY29weV90b19tYWlufQojIFNhdmUgZGF0YQp3cml0ZS5jc3Yod2hpdGVfcGFnZXMsZmlsZS5wYXRoKGRpckFwcEJhY2t1cERhdGUsIldoaXRlUGFnZXNEYXRhLmNzdiIpLHJvdy5uYW1lcyA9IEZBTFNFKQoKIyBNb3ZlIGRhdGEgdG8gbWFpbiBBcHAgZm9sZGVyCmRpckFwcERhdGEgPC0gIi9Vc2Vycy9xdWFnbGllcmkuYS9XaGl0ZVBhZ2VzL1doaXRlUGFnZXNBcHAvZGF0YSIKZnJvbSA8LSBmaWxlLnBhdGgoZmlsZS5wYXRoKGRpckFwcEJhY2t1cERhdGUsIldoaXRlUGFnZXNEYXRhLmNzdiIpKQp0byA8LSBmaWxlLnBhdGgoZGlyQXBwRGF0YSwiV2hpdGVQYWdlc0RhdGEuY3N2IikKZmlsZS5jb3B5KGZyb20sdG8sb3ZlcndyaXRlID0gVFJVRSkKCiMgTW92ZSBwaG90b3MgdG8gbWFpbiBBcHAgZm9sZGVyCmRpckFwcEltYWdlcyA8LSAgIi9Vc2Vycy9xdWFnbGllcmkuYS9XaGl0ZVBhZ2VzL1doaXRlUGFnZXNBcHAvaW1hZ2VzIgpmcm9tIDwtIGZpbGUucGF0aChmaWxlLnBhdGgoZGlyQXBwQmFja3VwRGF0ZSwiaW1hZ2VzIikpCnRvIDwtIGZpbGUucGF0aChkaXJBcHApCmZpbGUuY29weShmcm9tLHRvLHJlY3Vyc2l2ZSA9IFRSVUUsb3ZlcndyaXRlID0gVFJVRSkKCmBgYAoKIyBEYXRhIFN0YXRzCgpJbiB0aGUgYmFja2VkdXAgKipXaGl0ZSBQYWdlcyoqIG9uIHRoZSBgciBTeXMuRGF0ZSgpYCB0aGVyZSBhcmUgYHIgbnJvdyh3aGl0ZV9wYWdlcylgIGVudHJpZXMgYW5kIGByIG5jb2wod2hpdGVfcGFnZXMpYCBjb2x1bW5zLgoKVGhlIGZ1bGwgKipXaGl0ZSBQYWdlcyoqIGlzIHByaW50ZWQgYmVsb3cuCgpgYGB7cn0Ka2FibGUod2hpdGVfcGFnZXMpCmBgYAoKLSBMaXN0IG9mIHBlb3BsZSBwcmVzZW50IGluIHRoZSBzdHVkZW50J3MgZm9sZGVyCgoKYGBge3J9Cmxpc3QuZmlsZXMoZGlyQXBwQmFja3VwSW1hZ2VzLHJlY3Vyc2l2ZSA9IFRSVUUpCmBgYAoK</div>
 
 
 </div>
