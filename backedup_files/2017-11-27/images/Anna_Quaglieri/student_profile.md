@@ -6,7 +6,7 @@ Anna Quaglieri
 --------------
 
 <!-- rnb-text-end -->
-<img src="/Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files/2017-11-28/images/Anna_Quaglieri/student_profile_files/figure-markdown_github/white_name$NameFolder-1.png" style="display: block; margin: auto auto auto 0;" />
+<img src="/Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files/2017-11-27/images/Anna_Quaglieri/student_profile_files/figure-markdown_github/white_name$NameFolder-1.png" style="display: block; margin: auto auto auto 0;" />
 
 <!-- rnb-text-begin -->
 ### Contact details

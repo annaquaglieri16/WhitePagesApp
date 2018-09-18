@@ -2,7 +2,7 @@
 server <- function(input, output) {
   
   # choose columns to display
-  output$mytable1 <- DT::renderDataTable(
+  output$WPData <- DT::renderDataTable(
     data.frame(white_pages_display[!(colnames(white_pages_display) %in% "NameDisplay")]),
     options = list(pageLength=10))
   

@@ -8,7 +8,7 @@ ui <- navbarPage("WEHI White Pages",theme = shinytheme("flatly"),
                             ),
                             
                             column(10,
-                                   DT::dataTableOutput('mytable1')
+                                   DT::dataTableOutput('WPData')
                             )
                           )
                  ),

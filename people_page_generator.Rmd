@@ -5,6 +5,7 @@ output:
     df_print: paged
 params:
   white_name: ''
+  dirAppBackupImages: ''
 ---
 
 ```{r setup,include=TRUE,echo=FALSE,message=FALSE,cache=FALSE}
@@ -12,15 +13,10 @@ library(png)
 library(grid)
 library(readr)
 
-# input name
+# input name - should only be one row - maybe insert a check
 white_name <- params$white_name
 NameFolder <- white_name$NameFolder
-
-# dirBackup
-date <- Sys.Date()
-dirAppBackup <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files"
-dirAppBackupDate <- file.path(dirAppBackup,date)
-dirAppBackupImages <- file.path(dirAppBackupDate,"images")
+dirAppBackupImages <- params$dirAppBackupImages
 ```
 
 ## `r white_name$NameDisplay`

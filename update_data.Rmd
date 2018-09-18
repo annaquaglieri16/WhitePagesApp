@@ -14,22 +14,19 @@ output:
 ```{r include=FALSE,message=FALSE,echo=TRUE}
 knitr::opts_chunk$set(echo = TRUE,tidy = TRUE)
 
-library(DT)
-library(tidyverse)
-library(redcapAPI)
-library(reshape2)
-library(knitr)
-library(chron)
+list.of.packages <- c("shiny","tidyverse","DT","readr","redcapAPI","reshape2","knitr","chron")
+lapply(list.of.packages, require, character.only = TRUE)
 
 # Directories
-# Dir of the App
-dirApp <- "/Users/quaglieri.a/WhitePages/WhitePagesApp"
-dirRfunctions <- "/Users/quaglieri.a/WhitePages/WhitePagesApp/Rfunction"
+# Dir in the main the App folder
+dirApp <- getwd()
+dirAppImages <-  file.path(dirApp,"images")
+dirAppData <- file.path(dirApp,"data")
 
 # create backup folder with a specific date
 date <- Sys.Date()
-dirAppBackup <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/backedup_files"
-dirAppBackupDate <- file.path(dirApp,"backedup_files",date)
+dirAppBackup <-  file.path(dirApp,"backedup_files")
+dirAppBackupDate <- file.path(dirAppBackup,date)
 dir.create(dirAppBackupDate,showWarnings = FALSE,recursive = TRUE)
 
 # Students' photos directory
@@ -48,7 +45,7 @@ white_pages$PhotoName <- NA
 
 # Clean text data
 
-Try to mkae every text column as a list of item separated by a comma.
+Try to make every text column as a list of item separated by a comma.
 
 ```{r clean_data}
 # areas_of_interest_or_exper
@@ -108,6 +105,11 @@ white_pages$thetimes <- thetimes
 
 ```{r}
 white_pages[is.na(white_pages$wehi_white_pages_timestamp),]
+
+# Check if the entries with NA timestamp have more than one entry
+# na_emails <- white_pages$contact_email[is.na(white_pages$wehi_white_pages_timestamp) & !is.na(white_pages$contact_email)]
+#n_entries_NAemails <- sapply(na_emails,function(x) grep(x,white_pages$contact_email))
+#remove_entries <- names(which(sapply(n_entries_NAemails,length) > 1))
 ```
 
 - Keep only one record for student (the latest one)
@@ -164,9 +166,10 @@ for(i in 1:nrow(white_pages)){
              recursive = TRUE,showWarnings = FALSE)
   
   # Create Student profile with people's page generator
-  rmarkdown::render(input=file.path(dirRfunctions,"people_page_generator.Rmd"),
+  rmarkdown::render(input=file.path(dirApp,"people_page_generator.Rmd"),
           output_file  = file.path(dirAppBackupImages,name_surname,"student_profile.md"),
-          params = list(white_name = white_pages[white_pages$NameFolder %in% name_surname,]))
+          params = list(white_name = white_pages[white_pages$NameFolder %in% name_surname,],
+                      dirAppBackupImages = dirAppBackupImages))
 }
 ```
 
@@ -176,13 +179,11 @@ for(i in 1:nrow(white_pages)){
 write.csv(white_pages,file.path(dirAppBackupDate,"WhitePagesData.csv"),row.names = FALSE)
 
 # Move data to main App folder
-dirAppData <- "/Users/quaglieri.a/WhitePages/WhitePagesApp/data"
 from <- file.path(file.path(dirAppBackupDate,"WhitePagesData.csv"))
 to <- file.path(dirAppData,"WhitePagesData.csv")
 file.copy(from,to,overwrite = TRUE)
 
 # Move photos to main App folder
-dirAppImages <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/images"
 from <- file.path(file.path(dirAppBackupDate,"images"))
 to <- file.path(dirApp)
 file.copy(from,to,recursive = TRUE,overwrite = TRUE)

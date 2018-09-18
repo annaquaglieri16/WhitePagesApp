@@ -1,22 +1,22 @@
-library(shiny)
-library(ggplot2)  # for the diamonds dataset
-library(DT)
-library(readr)
-# install.packages("shinythemes")
-library(shinythemes)
-library(png)
-library(grid)
+# R Functions to load 
+
+list.of.packages <- c("shiny","tidyverse","DT","readr","shinythemes","png","grid")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages,repos = "https://cloud.r-project.org")
+lapply(list.of.packages, require, character.only = TRUE)
+
 
 # Directory
 ## App directory
-dirApp <- "/Users/quaglieri.a/WhitePages/WhitePagesApp"
+dirApp <- "."
 # data directory
-dirAppData <- "/Users/quaglieri.a/WhitePages/WhitePagesApp/data"
-## Folder where student photos are saved
-dirAppImages <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/images"
-## R function
-dirRfunctions <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/Rfunction"
-dirPages <-  "/Users/quaglieri.a/WhitePages/WhitePagesApp/pages"
+dirAppData <- file.path(dirApp,"data")
+## Folder where student photos and profiles are saved
+dirAppImages <-  file.path(dirApp,"images")
+## R functions
+dirRfunctions <-  file.path(dirApp,"Rfunction")
+# Other pages of the app
+dirPages <-  file.path(dirApp,"pages")
 
 # Read in Data
 white_pages <- read.csv(file.path(dirAppData,"WhitePagesData.csv"))
@@ -34,24 +34,15 @@ colnames(white_pages)[colnames(white_pages) %in% "software_experience"] <- "Soft
 colnames(white_pages)[colnames(white_pages) %in% "prof_development"] <- "Professional development"
 colnames(white_pages)[colnames(white_pages) %in% "hobbies_interests"] <- "Hobbies/Interests"
 
-# Remove columns
+# Remove columns not needed for display on the website
 white_pages <- white_pages[,colnames(white_pages)[!(colnames(white_pages) %in%
 c("record_id","redcap_survey_identifier","wehi_white_pages_timestamp","wehi_white_pages_complete","photo_upload"))]]
 
 # Dataset to display
 white_pages_display <- white_pages[,!(colnames(white_pages) %in% c("PhotoName","dtimes","thetimes","NameFolder"))]
 
-# white oages default student profile
+# White Pages default student profile
 white_pages_display <- rbind(white_pages_display,NA)
-white_pages_display$NameDisplay <- ifelse(is.na(white_pages_display$NameDisplay), " ", as.character(white_pages_display$NameDisplay))
+white_pages_display$NameDisplay <- ifelse(is.na(white_pages_display$NameDisplay), " ", 
+                                          as.character(white_pages_display$NameDisplay))
 
-# Home 'Student Profiles' 'About' 'How to'
-
-# With Si make the How to 
-# How to navigate it and how to add your own record
-# In the how to page - how to access the survey and disclaimer
-# How to add your record
-# Disclaimer paragraph (from James)
-# and click to redcap t add your record
-# 
-# Under the logo put: Create a profile
